@@ -32,4 +32,14 @@ class CommentManager extends Manager
 
 	return $comment;
 	}
+
+	public function editComment($commentId, $comment) // fonction qui permet de modifier un commentaire
+	{
+	    $db = $this->dbConnect();
+	    $comments = $db->prepare('UPDATE comments SET comment = ? WHERE id = ?');
+	    $modify = $comments->execute(array($comment, $commentId));
+
+	return $modify;
+	}
+
 }
