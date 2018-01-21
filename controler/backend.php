@@ -7,7 +7,7 @@ require_once('./model/CommentManager.php');
 
 class BackendControler
 {
-	private function modifyComment($commentId, $comment, $postId) {
+	public function modifyComment($commentId, $comment, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 
 	    $editComment = $commentManager->editComment($commentId, $comment);
@@ -18,5 +18,9 @@ class BackendControler
 	    else {
 		    header('Location: index.php?action=post&id=' . $postId);
 	    }
+	}
+
+	public function adminForm() {
+		require('./view/backend/admin.php');
 	}
 }

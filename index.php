@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
     
     } elseif ($_GET['action'] == 'editForm') {
         if (isset($_GET['id']) && $_GET['id'] > 0 && !empty($_POST['comment']) && !empty($_POST['id_post'])) {
-            $frontendControler->modifyComment($_GET['id'], $_POST['comment'], $_POST['id_post']);
+            $backendControler->modifyComment($_GET['id'], $_POST['comment'], $_POST['id_post']);
         } else {             
             throw new Exception('Erreur');
         }
@@ -41,6 +41,9 @@ if (isset($_GET['action'])) {
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');
         }
+
+    } elseif ($_GET['action'] == 'adminLogin') {
+        $backendControler->adminForm();
     }
     
 } else {

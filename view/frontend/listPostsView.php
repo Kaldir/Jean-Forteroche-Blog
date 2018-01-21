@@ -28,4 +28,4 @@
 			
 <?php $content = ob_get_clean(); ?> <!-- restitue le code html de la variable "content" (voir ligne 3) -->
 
-<?php require('template.php'); ?>
+<?php require('./view/template.php'); ?>
