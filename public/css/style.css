@@ -1,0 +1,121 @@
+.row {
+    margin : 0;
+}
+h1, h2 {
+    text-align: center;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* pour définir une hauteur égale à la hauteur de la fenêtre (100% viewport height) - pour mettre le footer en bas de page */
+}
+
+/* HEADER */
+
+#header, #footer {
+    background-color: violet;
+}
+.headerRow {
+    justify-content: center;
+    flex-direction: column;
+}
+#content {
+    margin-top : 20px;
+    margin-bottom : 20px;
+    flex-grow: 1; /* pour pousser le footer en bas de page */
+}
+#return {
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    background-color: mistyrose;
+    margin: 5px 5px 0 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/* BIOGRAPHY */
+
+.biography {
+    background-color: mistyrose;
+    border-radius : 5px;
+    padding: 8px;
+}
+#logo_JF {
+    width: 100%;
+}
+
+/* NEWS */
+
+.news {
+    margin: auto;
+    border-radius: 5px;
+}
+    .news h3 {
+        padding: 10px;
+        background-color: violet;
+        color: white;
+        font-size: 0.9em;
+        margin-bottom: 0px;
+        text-align: center;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .news p {
+        background-color: mistyrose;
+        margin-top: 0px;
+        padding: 15px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+a {
+    text-decoration: none;
+    color: blue;
+}
+
+/* COMMENTAIRES */
+
+#commentDisplay {
+    flex-direction: column;
+    background-color: mistyrose;
+    border-radius : 5px;
+    padding: 15px;
+}
+    #formComment {
+        margin: 15px 0;
+    }
+        #author, #comment {
+            width: 100%;
+        }
+        #submitComment {
+            border-radius: 5px;
+            border: none;
+            background-color: violet;
+        }
+
+/* CONNEXION, CONTACT & SOCIAL NETWORK*/
+
+.admin {
+    background-color: mistyrose;
+    border-radius : 5px;
+    padding: 8px;
+}
+
+#contact a {
+    color: black;
+}
+    #contact a:hover {
+        text-decoration: none;
+    }
+
+#socialNetwork {
+    color: blue;
+}
+
+/* FOOTER */
+
+.footerRow {
+    justify-content: center;
+}
