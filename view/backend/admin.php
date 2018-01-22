@@ -8,17 +8,14 @@
 	<div class="news">
 	    <h2>Connexion</h2>
 
-	    <form action="index.php?action=listPosts" method="post"> <!-- appelle la variable id avec a variable GET (voir postView.php - ligne 50) -->
-	        <div>
-	            <label for="pseudo">Pseudo</label><br />
-	            <input type="text" id="pseudo" name="pseudo" required />
-	            <label for="pseudo">Mot de passe</label><br />
-	            <input type="password" id="password" name="password" required />         
-	        </div>
+	    <form action="index.php?action=adminInterface" method="post">
+            <label for="pseudo">Pseudo</label><br />
+            <input type="text" id="pseudo" name="pseudo" required /><br />
 
-	        <div>
-	            <input type="submit" name="connexion" value="Connexion" />
-	        </div>
+            <label for="password">Mot de passe</label><br />
+            <input type="password" id="password" name="password" required /><br />
+
+            <input type="submit" name="connexion" value="Connexion" />
 	    </form>
 	</div>
 </div>

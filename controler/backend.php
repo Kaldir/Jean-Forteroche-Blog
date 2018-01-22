@@ -23,4 +23,16 @@ class BackendControler
 	public function adminForm() {
 		require('./view/backend/admin.php');
 	}
+
+	public function adminIndex() {
+		require('./view/backend/adminIndex.php');
+	}
+
+	public function adminPosts() {
+		require('./view/backend/adminPosts.php');
+	}
+
+	public function adminComments() {
+		require('./view/backend/adminComments.php');
+	}
 }

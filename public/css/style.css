@@ -38,7 +38,7 @@ body {
 
 /* BIOGRAPHY */
 
-.biography {
+.biography, .choice {
     background-color: mistyrose;
     border-radius : 5px;
     padding: 8px;

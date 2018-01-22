@@ -44,8 +44,17 @@ if (isset($_GET['action'])) {
 
     } elseif ($_GET['action'] == 'adminLogin') {
         $backendControler->adminForm();
-    }
+
+    } elseif ($_GET['action'] == 'adminInterface') {
+        $backendControler->adminIndex();
     
+    } elseif ($_GET['action'] == 'adminViewPosts') {
+        $backendControler->adminPosts();
+    
+    } elseif ($_GET['action'] == 'adminViewComments') {
+        $backendControler->adminComments();
+    }
+
 } else {
     $frontendControler->listPosts();
 }
