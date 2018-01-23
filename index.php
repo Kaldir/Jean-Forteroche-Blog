@@ -1,4 +1,4 @@
-<?php // ROUTEUR
+<?php
 require('controler/frontend.php');
 require('controler/backend.php');
 
@@ -12,7 +12,11 @@ if (isset($_GET['action'])) {
 
     elseif ($_GET['action'] == 'post') {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $frontendControler->post();
+            if (isset($_GET['signaled'])) {
+                $frontendControler->post($_GET['id'], true); // si signalised existe, sa valeur est true
+            } else {
+                $frontendControler->post($_GET['id']); // sinon, elle garde sa valeur par défaut (false)
+            }
         } else {             
             throw new Exception('Aucun identifiant de billet envoyé'); // gestion des erreurs avec une exception : stop l'exécution, envoie l'exception, va directement au bloc catch
         }
@@ -37,22 +41,31 @@ if (isset($_GET['action'])) {
 
     } elseif ($_GET['action'] == 'displayCommentsForm') {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $frontendControler->displayCommentsForm();
+            $frontendControler->displayCommentsForm($_GET['id']);
         } else {
             throw new Exception('Aucun identifiant de billet envoyé');
         }
 
+    } elseif ($_GET['action'] == 'login') {
+        if (isset($_POST['password']) AND $_POST['password'] == "Alaska" AND isset($_POST['pseudo']) AND $_POST['pseudo'] == "Forteroche") {
+        $backendControler->adminIndex();
+        } else {
+       $backendControler->adminForm('Votre identifiant ou votre mot de passe est incorrect !');
+        }
+    
     } elseif ($_GET['action'] == 'adminLogin') {
         $backendControler->adminForm();
-
-    } elseif ($_GET['action'] == 'adminInterface') {
-        $backendControler->adminIndex();
     
     } elseif ($_GET['action'] == 'adminViewPosts') {
         $backendControler->adminPosts();
     
     } elseif ($_GET['action'] == 'adminViewComments') {
         $backendControler->adminComments();
+
+    } elseif ($_GET['action'] == 'signalComment') {
+        if (isset($_GET['id']) && $_GET['id'] > 0) {
+            $frontendControler->signal($_GET['id'], $_GET['postId']);
+        }
     }
 
 } else {

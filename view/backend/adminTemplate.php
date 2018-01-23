@@ -5,10 +5,15 @@
 	    <title><?php echo $title ?></title>
 	   	<meta name="description" content="Jean Forteroche : Billet simple pour l'Alaska..." />
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-	    <link rel="stylesheet" href="public/css/style.css" type="text/css" />
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="public/css/style.css" type="text/css" />
 	    <meta name="viewport" content="initial-scale=1.0" />
 	    <link rel="icon" type="image/png" href="img/favicon.png" />
 	    <script src="https://use.fontawesome.com/bcf89603c7.js"></script>
+	    <script src="public/js/tinymce/tinymce.min.js"></script>
+  		<script>tinymce.init({ selector:'textarea' });</script>
+	    <script src="public/js/tinymce/jquery.tinymce.min.js"></script>
 	</head>
 
 	<body>

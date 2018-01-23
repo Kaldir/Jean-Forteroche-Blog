@@ -42,4 +42,13 @@ class CommentManager extends Manager
 	return $modify;
 	}
 
+	public function signalisedComment($commentId)
+	{
+	    $db = $this->dbConnect();
+		$comment = $db->prepare('UPDATE comments SET signalised = 1 WHERE id = ?');
+		$signal = $comment->execute(array($commentId));
+
+	return $signal;
+	}
+
 }

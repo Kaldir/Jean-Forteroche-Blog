@@ -8,7 +8,7 @@
 	<div class="news">
 	    <h2>Connexion</h2>
 
-	    <form action="index.php?action=adminInterface" method="post">
+	    <form action="index.php?action=login" method="post">
             <label for="pseudo">Pseudo</label><br />
             <input type="text" id="pseudo" name="pseudo" required /><br />
 
@@ -18,6 +18,8 @@
             <input type="submit" name="connexion" value="Connexion" />
 	    </form>
 	</div>
+
+	<?php echo $message ?>
 </div>
 
 <?php $content = ob_get_clean(); ?>

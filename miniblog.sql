@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 18 Janvier 2018 à 16:19
+-- Généré le :  Mar 23 Janvier 2018 à 17:16
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -31,18 +31,21 @@ CREATE TABLE `comments` (
   `id_post` int(11) NOT NULL,
   `author` varchar(255) NOT NULL,
   `comment` text NOT NULL,
-  `comment_date` datetime NOT NULL
+  `comment_date` datetime NOT NULL,
+  `signalised` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `comments`
 --
 
-INSERT INTO `comments` (`id`, `id_post`, `author`, `comment`, `comment_date`) VALUES
-(44, 2, 'Lulu', 'Oh, on peut modifier ses commentaires ! Trop bien !', '2018-01-18 17:18:26'),
-(45, 1, 'Lulu', 'Je préfère la Creuse...', '2018-01-18 17:18:49'),
-(43, 2, 'Milo', 'Moi je préfère les rats...', '2018-01-18 17:18:15'),
-(42, 2, 'Lulu', 'Ouais, vive les grenouilles', '2018-01-18 17:18:03');
+INSERT INTO `comments` (`id`, `id_post`, `author`, `comment`, `comment_date`, `signalised`) VALUES
+(47, 2, 'Test', '1, 2, 3', '2018-01-21 15:57:28', 1),
+(46, 3, 'Test', 'Ok  !', '2018-01-20 12:38:16', 0),
+(44, 2, 'Lulu', 'Oh, on peut modifier ses commentaires ! Trop bien !', '2018-01-18 17:18:26', 1),
+(45, 1, 'Lulu', 'Je préfère la Creuse...', '2018-01-18 17:18:49', 0),
+(43, 2, 'Milo', 'Moi je préfère les rats...', '2018-01-18 17:18:15', 1),
+(42, 2, 'Lulu', 'Ouais, vive les grenouilles', '2018-01-18 17:18:03', 1);
 
 -- --------------------------------------------------------
 
@@ -90,7 +93,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT pour la table `posts`
 --

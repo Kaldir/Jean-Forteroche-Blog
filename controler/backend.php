@@ -20,8 +20,8 @@ class BackendControler
 	    }
 	}
 
-	public function adminForm() {
-		require('./view/backend/admin.php');
+	public function adminForm($message = '') {
+		require('./view/frontend/admin.php');
 	}
 
 	public function adminIndex() {

@@ -47,10 +47,11 @@
         <?php
         while ($comment = $comments->fetch()) {
             ?>
+            <p>En cliquant sur cette icone <i class="fa fa-exclamation-circle" aria-hidden="true"></i>, vous pouvez signaler un commentaire inadapté à l'administrateur du site.</p>
             <p>
+                <a href="index.php?action=signalComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;postId=<?php echo htmlspecialchars($_GET['id']); ?>"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
                 <strong><?php echo htmlspecialchars($comment['author']); ?></strong>
                 <i>posté le <?php echo htmlspecialchars($comment['comment_date']); ?> </i>
-                <a href="index.php?action=displayCommentsForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>">(modifier)</a>
                 <?php echo nl2br(htmlspecialchars($comment['comment'])); ?> <!-- nl2br gère les retour à la ligne dans le contents -->
             </p>
         <?php
@@ -58,6 +59,27 @@
         ?>
     </div>
 </div>
+
+<?php
+if ($signalised) {
+    ?>
+    <div id="modalSignal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+          </div>
+          <div class="modal-body">
+            <p>Vous venez de signaler un commentaire : l'administrateur prendra cette information en compte dès que possible, merci !</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok !</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<?php
+}
+?>
 
 <?php $content = ob_get_clean(); ?>
 

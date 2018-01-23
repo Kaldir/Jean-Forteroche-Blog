@@ -14,12 +14,12 @@ class FrontendControler
 		require('./view/frontend/listPostsView.php');
 	}
 
-	public function post() {
+	public function post($postId, $signalised = false) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 
-		$post = $postManager->getPost($_GET['id']);
-		$comments = $commentManager->getComments($_GET['id']);
+		$post = $postManager->getPost($postId);
+		$comments = $commentManager->getComments($postId);
 
 		require('./view/frontend/postView.php');
 	}
@@ -36,10 +36,16 @@ class FrontendControler
 	    }
 	}
 
-	public function displayCommentsForm() {
+	public function displayCommentsForm($commentId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
-		$comment = $commentManager->selectComment($_GET['id']);
+		$comment = $commentManager->selectComment($commentId);
 		
 		require('./view/backend/commentModify.php');
+	}
+
+	public function signal($commentId, $postId) {
+		$commentManager = new \Kldr\Blog\Model\CommentManager();
+		$commentManager->signalisedComment($commentId);
+		header('Location: index.php?action=post&signaled&id=' . $postId);
 	}
 }
