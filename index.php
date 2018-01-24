@@ -52,13 +52,20 @@ if (isset($_GET['action'])) {
         } else {
        $backendControler->adminForm('Votre identifiant ou votre mot de passe est incorrect !');
         }
-    
+
+    } elseif ($_GET['action'] == 'addPost') {
+            if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                $backendControler->addPost($_POST['title'], $_POST['content']);
+            } else {
+                throw new Exception('Tous les champs ne sont pas remplis !');
+        }
+
     } elseif ($_GET['action'] == 'adminLogin') {
         $backendControler->adminForm();
     
     } elseif ($_GET['action'] == 'adminViewPosts') {
-        $backendControler->adminPosts();
-    
+        $backendControler->adminViewPosts();
+
     } elseif ($_GET['action'] == 'adminViewComments') {
         $backendControler->adminComments();
 

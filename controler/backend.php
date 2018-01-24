@@ -7,6 +7,25 @@ require_once('./model/CommentManager.php');
 
 class BackendControler
 {
+	public function adminViewPosts() {
+		$postManager = new \Kldr\Blog\Model\PostManager(); // Création d'un objet
+		$posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
+
+		require('./view/backend/adminPosts.php');
+	}
+
+	public function addPost($title, $content) {
+			$postManager = new \Kldr\Blog\Model\PostManager();
+
+			$affectedLines = $postManager->postPost($title, $content);
+
+			if ($affectedLines == false) {
+		        throw new Exception('Impossible d\'ajouter le billet !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
+		    } else {
+				header('Location: index.php?action=adminViewPosts');
+		    }
+	}
+
 	public function modifyComment($commentId, $comment, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 

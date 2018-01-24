@@ -81,6 +81,14 @@ if ($signalised) {
 }
 ?>
 
+<?php
+if ($signalised) {
+    ?>
+        <script> $('#modalSignal').modal('show'); </script>
+<?php
+}
+?>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('./view/template.php'); ?>
