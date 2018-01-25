@@ -16,7 +16,7 @@
 			</h3>
 
 			<p>
-				<?php echo nl2br(htmlspecialchars($data['content'])); ?><br /> <!-- nl2br gère les retour à la ligne dans le contents -->
+				<?php echo nl2br (htmlspecialchars($data['content'])); ?><br /> <!-- nl2br gère les retour à la ligne dans le contents -->
 				<a href="index.php?action=post&amp;id=<?php echo $data['id'] ?>">Commentaires</a>
 			</p>
 		</div>

@@ -1,4 +1,4 @@
-<?php //CONTROLER
+<?php // CONTROLER
 namespace Kldr\Blog\Controler;
 
 // Chargement des classes
@@ -36,6 +36,17 @@ class BackendControler
 	    }
 	    else {
 		    header('Location: index.php?action=post&id=' . $postId);
+	    }
+	}
+
+	public function displayPostForm($postId) {
+		$postManager = new \Kldr\Blog\Model\PostManager();
+	    $post = $postManager->selectPost($postId);
+
+		require('./view/backend/postModify.php');
+
+	    if ($post == false) {
+	        throw new Exception('Impossible d\'éditer le billet');
 	    }
 	}
 

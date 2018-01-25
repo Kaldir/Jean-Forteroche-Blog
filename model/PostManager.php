@@ -23,7 +23,7 @@ class PostManager extends Manager
 
     public function postPost($title, $content) { // ajout d'un post
         $db = $this->dbConnect();
-        $post = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES(?, ?, NOW())');
+        $post = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES (?, ?, NOW())');
         $affectedLines = $post->execute(array($title, $content));
 
     return $affectedLines;
@@ -39,11 +39,11 @@ class PostManager extends Manager
     return $post;
     }
 
-    public function editPost($postId, $title, $content) // fonction qui permet de modifier un post
+    public function editPost($postId) // fonction qui permet de modifier un post
     {
         $db = $this->dbConnect();
-        $comments = $db->prepare('UPDATE posts SET title = ? AND content = ? WHERE id = ?');
-        $modify = $posts->execute(array($postId, $title, $content));
+        $posts = $db->prepare('UPDATE posts SET title = ? AND content = ? WHERE id = ?');
+        $modify = $posts->execute(array($postId));
 
     return $modify;
     }

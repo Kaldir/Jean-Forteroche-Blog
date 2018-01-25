@@ -8,12 +8,12 @@
     <a href="./view/backend/admin.php">Annuler</a>
 
     <div class="news">
-        <form action="index.php?action=editPost&amp;id=<?= $_GET['id'] ?>" method="post">
+        <form action="index.php?action=&amp;id=<?= $_GET['id'] ?>" method="post">
             <div>
-                <label for="postTitle">Titre</label><br />
-                <input id="postTitle" name="postTitle" /><?php echo nl2br(htmlspecialchars($post['title'])) ?> />
-                <label for="postContent">Contenu</label><br />
-                <textarea id="postContent" name="postContent" /><?php echo nl2br(htmlspecialchars($post['content'])) ?></textarea>
+                <label for="title">Titre</label><br />
+                <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($post['title'] )?>" /><br />
+                <label for="content">Contenu</label><br />
+                <textarea id="content" name="content"><?php echo $post['content'] ?></textarea>
             </div>
 
             <div>

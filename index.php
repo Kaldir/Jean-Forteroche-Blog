@@ -60,6 +60,9 @@ if (isset($_GET['action'])) {
                 throw new Exception('Tous les champs ne sont pas remplis !');
         }
 
+    } elseif ($_GET['action'] == 'displayPostForm') {
+        $backendControler->displayPostForm($_GET['id']);
+
     } elseif ($_GET['action'] == 'adminLogin') {
         $backendControler->adminForm();
     
