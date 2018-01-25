@@ -28,10 +28,11 @@
 		<div class="news">
 			<h3>
 				<strong><?php echo htmlspecialchars($post['title']); ?></strong>
-				<i>posté le <?php echo htmlspecialchars($post['creation_date']); ?></i>
+				<i>- <?php echo htmlspecialchars($post['creation_date']); ?></i>
 
 				<a href="index.php?action=displayPostForm&amp;id=<?php echo htmlspecialchars($post['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-<!--				<a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($post['id']); ?>&amp;postId=<?php echo htmlspecialchars($post['id']); ?>"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+
+				<a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($post['id']); ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
 			</h3>
 
 			<p><?php echo $post['content']; ?></p>

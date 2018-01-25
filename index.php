@@ -70,6 +70,9 @@ if (isset($_GET['action'])) {
             throw new Exception('Erreur');
         }
 
+    } elseif ($_GET['action'] == 'deletePost') {
+        $backendControler->deletePost($_GET['id']);
+
     } elseif ($_GET['action'] == 'adminLogin') {
         $backendControler->adminForm();
     

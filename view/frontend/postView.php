@@ -14,7 +14,7 @@
         <div class="news">
             <h3>
                 <strong><?php echo htmlspecialchars($post['title']); ?> </strong>
-                <i>posté le <?php echo htmlspecialchars($post['creation_date']); ?> </i>
+                <i>- <?php echo htmlspecialchars($post['creation_date']); ?> </i>
             </h3>
             
             <?php echo nl2br($post['content']); ?>
@@ -51,7 +51,7 @@
             <p>
                 <a href="index.php?action=signalComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;postId=<?php echo htmlspecialchars($_GET['id']); ?>"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
                 <strong><?php echo htmlspecialchars($comment['author']); ?></strong>
-                <i>posté le <?php echo htmlspecialchars($comment['comment_date']); ?> </i>
+                <i>- <?php echo htmlspecialchars($comment['comment_date']); ?> </i>
                 <?php echo nl2br(htmlspecialchars($comment['comment'])); ?> <!-- nl2br gère les retour à la ligne dans le contents -->
             </p>
         <?php

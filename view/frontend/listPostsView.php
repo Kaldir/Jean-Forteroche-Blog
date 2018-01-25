@@ -12,7 +12,7 @@
 		<div class="news">
 			<h3>
 				<strong><?php echo htmlspecialchars($data['title']); ?></strong>
-				<i>posté le <?php echo htmlspecialchars($data['creation_date']); ?></i>
+				<i>- <?php echo htmlspecialchars($data['creation_date']); ?></i>
 			</h3>
 			
 			<?php echo $data['content']; ?>

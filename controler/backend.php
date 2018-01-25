@@ -62,6 +62,13 @@ class BackendControler
 		    }
 	}
 
+	public function deletePost($postId) {
+		$postManager = new \Kldr\Blog\Model\PostManager();
+	    $deletePost = $postManager->deletePost($postId);
+	 
+		header('Location: index.php?action=adminViewPosts');
+	}
+
 	public function adminForm($message = '') {
 		require('./view/frontend/admin.php');
 	}
