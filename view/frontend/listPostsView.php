@@ -14,11 +14,9 @@
 				<strong><?php echo htmlspecialchars($data['title']); ?></strong>
 				<i>posté le <?php echo htmlspecialchars($data['creation_date']); ?></i>
 			</h3>
-
-			<p>
-				<?php echo nl2br (htmlspecialchars($data['content'])); ?><br /> <!-- nl2br gère les retour à la ligne dans le contents -->
-				<a href="index.php?action=post&amp;id=<?php echo $data['id'] ?>">Commentaires</a>
-			</p>
+			
+			<?php echo $data['content']; ?>
+			<a href="index.php?action=post&amp;id=<?php echo $data['id'] ?>">Commentaires</a>
 		</div>
 	<?php
 	}

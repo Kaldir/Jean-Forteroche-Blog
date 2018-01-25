@@ -27,9 +27,9 @@ class FrontendControler
 	public function addComment($postId, $author, $comment) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 
-		$affectedLines = $commentManager->postComment($postId, $author, $comment);
+		$success = $commentManager->postComment($postId, $author, $comment);
 
-		if ($affectedLines == false) {
+		if ($success == false) {
 	        throw new Exception('Impossible d\'ajouter le commentaire !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
 	    } else {
 			header('Location: index.php?action=post&id=' . $postId);

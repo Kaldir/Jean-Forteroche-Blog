@@ -63,6 +63,13 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'displayPostForm') {
         $backendControler->displayPostForm($_GET['id']);
 
+    } elseif ($_GET['action'] == 'editPost') {
+        if (isset($_GET['id']) && $_GET['id'] > 0 && !empty($_POST['title']) && !empty($_POST['content'])) {
+            $backendControler->editPost($_POST['title'], $_POST['content'], $_GET['id']);
+        } else {             
+            throw new Exception('Erreur');
+        }
+
     } elseif ($_GET['action'] == 'adminLogin') {
         $backendControler->adminForm();
     

@@ -17,9 +17,9 @@ class BackendControler
 	public function addPost($title, $content) {
 			$postManager = new \Kldr\Blog\Model\PostManager();
 
-			$affectedLines = $postManager->postPost($title, $content);
+			$success = $postManager->postPost($title, $content);
 
-			if ($affectedLines == false) {
+			if ($success == false) {
 		        throw new Exception('Impossible d\'ajouter le billet !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
 		    } else {
 				header('Location: index.php?action=adminViewPosts');
@@ -48,6 +48,18 @@ class BackendControler
 	    if ($post == false) {
 	        throw new Exception('Impossible d\'éditer le billet');
 	    }
+	}
+
+	public function editPost($title, $content, $postId) {
+			$postManager = new \Kldr\Blog\Model\PostManager();
+
+			$success = $postManager->editPost($title, $content, $postId);
+
+			if ($success == false) {
+		        throw new Exception('Impossible d\'éditer le billet !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
+		    } else {
+				header('Location: index.php?action=adminViewPosts');
+		    }
 	}
 
 	public function adminForm($message = '') {

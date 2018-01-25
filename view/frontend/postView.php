@@ -16,9 +16,8 @@
                 <strong><?php echo htmlspecialchars($post['title']); ?> </strong>
                 <i>posté le <?php echo htmlspecialchars($post['creation_date']); ?> </i>
             </h3>
-            <p>
-            <?php echo nl2br (htmlspecialchars($post['content'])); ?> <!-- nl2br gère les retour à la ligne dans le contents -->
-            </p>
+            
+            <?php echo nl2br($post['content']); ?>
         </div>
     <?php
     } else {
@@ -44,10 +43,11 @@
             </div>
         </form>
 
+        <p>En cliquant sur cette icone <i class="fa fa-exclamation-circle" aria-hidden="true"></i>, vous pouvez signaler un commentaire inadapté à l'administrateur du site.</p>
+
         <?php
         while ($comment = $comments->fetch()) {
             ?>
-            <p>En cliquant sur cette icone <i class="fa fa-exclamation-circle" aria-hidden="true"></i>, vous pouvez signaler un commentaire inadapté à l'administrateur du site.</p>
             <p>
                 <a href="index.php?action=signalComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;postId=<?php echo htmlspecialchars($_GET['id']); ?>"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
                 <strong><?php echo htmlspecialchars($comment['author']); ?></strong>

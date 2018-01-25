@@ -39,12 +39,12 @@ class PostManager extends Manager
     return $post;
     }
 
-    public function editPost($postId) // fonction qui permet de modifier un post
+    public function editPost($title, $content, $postId) // fonction qui permet de modifier un post
     {
         $db = $this->dbConnect();
-        $posts = $db->prepare('UPDATE posts SET title = ? AND content = ? WHERE id = ?');
-        $modify = $posts->execute(array($postId));
-
+        $posts = $db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
+        $modify = $posts->execute(array($title, $content, $postId));
+var_dump($modify);
     return $modify;
     }
 }

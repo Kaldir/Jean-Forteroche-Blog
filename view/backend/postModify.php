@@ -8,7 +8,7 @@
     <a href="./view/backend/admin.php">Annuler</a>
 
     <div class="news">
-        <form action="index.php?action=&amp;id=<?= $_GET['id'] ?>" method="post">
+        <form action="index.php?action=editPost&amp;id=<?= $_GET['id'] ?>" method="post">
             <div>
                 <label for="title">Titre</label><br />
                 <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($post['title'] )?>" /><br />
