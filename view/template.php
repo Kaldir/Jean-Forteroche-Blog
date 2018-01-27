@@ -11,51 +11,38 @@
 	</head>
 
 	<body>
-		<div id="header">
-		    <div class="container">
-		        <div class="row headerRow">
-		            <h1><a href="index.php">Jean Forteroche</a></h1>
-		            <h2>Billet simple pour l'Alaska</h2>
-		        </div>
-		    </div>
-		</div>
+		<div class="container-fluid d-flex introContainer">
+			<div class="row">
+				<div id="header" class="col-md-4">
+					<div id="titleBlog">
+			            <a href="index.php"><img id="leather" src="./public/img/leather2.png" />
+			            <h2>Billet simple pour l'Alaska</h2></a>
+			        </div>
+		       
+			        <div id="biography">
+			                <strong><p>Acteur renommé mais également écrivain, Jean Forteroche vous propose aujourd'hui de découvrir son dernier livre, par publication régulière, sur son blog spécialement dédié.</p></strong>
+			        </div>
 
-		<div id="content">
-		    <div class="container">
-		        <div class="row">
-		            <div class="biography col-md-3">
-		                <img src="./public/img/leather.jpg" alt="logo_JF" id="logo_JF" />
-
-		                <h4>Biographie</h4>
-
-		                <p>Jean Forteroche, principalement connu pour ses rôles dans des films français renommés, est avant tout un grand écrivain. Pour rester au plus proche de ses nombreux fans, il vous propose aujourd'hui de découvrir son dernier livre, avec une publication régulière de chaque chapitre, sur son blog spécialement dédié à celui-ci. Vous pourrez commenter chaque publication grâce au formulaire de commentaire situé sous chaque billet.</p>
-		            </div>
-
-					<?php echo $content ?>
-
-					<div class="admin col-md-2">			
-						<div id="contact">
-							<h4><a href="mailto:jean-forteroche@kldr.com"><i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i>Contact</a></h4>
+					<div id="adminPart">
+						<div id="adminLinks">
+							<a href="mailto:jean-forteroche@kldr.com"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a>
+							<a href=""><i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i></a>
+							<a href=""><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
 						</div>
-
 						
-						<div id="socialNetwork">
-							<p>Réseaux sociaux</p>
-							<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
-							<i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+						<div class="buttonStyle">
+							<a href="index.php?action=adminLogin">Connexion administrateur</a>
 						</div>
+					</div>
 
-						<a href="index.php?action=adminLogin">Connexion administrateur</a>
+					<div class="footer">
+						<p>Site créé par Lucie Kojadinovic - 2018</p>
 					</div>
 				</div>
-			</div>
-		</div>
 
-		<div id="footer">
-			<div class="container">
-				<div class="row footerRow">
-					<p>Site créé par Lucie Kojadinovic - 2018</p>
-				</div>
+				<div id="content" class="content col-md">
+			        <?php echo $content ?>
+			    </div>
 			</div>
 		</div>
 

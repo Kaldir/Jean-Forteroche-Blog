@@ -11,41 +11,30 @@
 	</head>
 
 	<body>
-		<div id="header">
-		    <div class="container">
-		        <div class="row headerRow">
-		            <h1><a href="index.php">Jean Forteroche</a></h1>
-		            <h2>Billet simple pour l'Alaska</h2>
-		        </div>
-		    </div>
-		</div>
+		<div class="container-fluid d-flex introContainer">
+			<div class="row">
+				<div id="header" class="col-md-4">
+					<div id="titleBlog">
+			            <a href="index.php"><img id="leather" src="./public/img/leather2.png" />
+			            <h2>Billet simple pour l'Alaska</h2></a>
+			        </div>
+		       
+			        <div id="admin">
+		                <p>Administration</p>
 
-		<div id="content">
-		    <div class="container">
-		        <div class="row">
-		            <div class="choice col-md-3">
-		                <img src="./public/img/leather.jpg" alt="logo_JF" id="logo_JF" />
+		                <a href="index.php?action=adminViewPosts" class="buttonStyle" method="post">Billets</a>
+		                <a href="index.php?action=adminViewComments" class="buttonStyle" method="post">Commentaires</a>
+		                <a href="index.php?action=listPosts" class="buttonStyle">Déconnexion</a>
+                    </div>
 
-		                <h4>Administration</h4>
-
-		                <a href="index.php?action=adminViewPosts" method="post">Billets</a><br />
-		                <a href="index.php?action=adminViewComments" method="post">Commentaires</a>               
-		            </div>
-
-					<?php echo $content ?>
-
-					<div class="admin col-md-2">			
-						<a href="index.php?action=listPosts">Déconnexion</a>
+					<div class="footer">
+						<p>Site créé par Lucie Kojadinovic - 2018</p>
 					</div>
 				</div>
-			</div>
-		</div>
 
-		<div id="footer">
-			<div class="container">
-				<div class="row footerRow">
-					<p>Site créé par Lucie Kojadinovic - 2018</p>
-				</div>
+				<div id="content" class="content col-md">
+			        <?php echo $content ?>
+			    </div>
 			</div>
 		</div>
 

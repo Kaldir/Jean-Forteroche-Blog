@@ -3,24 +3,19 @@
 <?php ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
 
 <!-- CONNEXION ADMIN -->
-<div class="col-md-7">
+<h2>Connexion administrateur</h2>
 
-	<div class="news">
-	    <h2>Connexion</h2>
-
-	    <form action="index.php?action=login" method="post">
-            <label for="pseudo">Pseudo</label><br />
-            <input type="text" id="pseudo" name="pseudo" required /><br />
-
-            <label for="password">Mot de passe</label><br />
-            <input type="password" id="password" name="password" required /><br />
-
-            <input type="submit" name="connexion" value="Connexion" />
-	    </form>
-	</div>
-
-	<?php echo $message ?>
+<div class="news">
+    <form action="index.php?action=login" method="post" id="connexionAdmin">
+        <label for="pseudo">Pseudo</label>
+        <input type="text" id="pseudo" name="pseudo" required />
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" required />
+        <input type="submit" name="connexion" class="buttonStyle" value="Connexion" />
+    </form>
 </div>
+
+<?php echo $message ?>
 
 <?php $content = ob_get_clean(); ?>
 

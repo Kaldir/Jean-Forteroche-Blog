@@ -1,88 +1,135 @@
-.row {
-    margin : 0;
+a:hover {
+    text-decoration: none;
 }
-h1, h2 {
-    text-align: center;
-}
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* pour définir une hauteur égale à la hauteur de la fenêtre (100% viewport height) - pour mettre le footer en bas de page */
+.introContainer {
+    height: 720px;
 }
 
 /* HEADER */
 
-#header, #footer {
-    background-color: violet;
-}
-.headerRow {
+#header {
+    background: url(../img/alaskaMenu.jpg);
+    background-repeat: no-repeat;
     justify-content: center;
     flex-direction: column;
+    display: flex;
+    text-align: center;
 }
+    #titleBlog {
+        color: white;
+        font-family: Copperplate Gothic;
+        flex-grow: 1; /* pousse le footer en bas de bloc */
+        margin-top: 60px;
+    }
+        #titleBlog a {
+            color: white;
+        }
+        #leather {
+            width: 200px;
+        }
+    #biography, #admin {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius : 5px;
+        padding: 10px 20px;
+        text-align: justify;
+        margin: 10px;
+    }
+    #admin {
+        display: flex;
+        flex-direction: column;
+    }
+        #admin p {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        #admin a {
+            align-self: center;
+        }
+    #adminPart {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius : 5px;
+        margin: 10px 60px;
+        padding: 5px;
+    }    
+        #adminPart a {
+            color: white;
+        }
+        #adminLinks {
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 5px;
+        }
+    .footer {
+        color: white;
+        padding-top: 15px;
+        font-size: 0.7em;
+    }    
+
+/* CONTENT */
+
 #content {
-    margin-top : 20px;
-    margin-bottom : 20px;
-    flex-grow: 1; /* pour pousser le footer en bas de page */
+    padding: 20px 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: overlay;
 }
-#return {
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    background-color: mistyrose;
-    margin: 5px 5px 0 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-/* BIOGRAPHY */
-
-.biography, .choice {
-    background-color: mistyrose;
-    border-radius : 5px;
-    padding: 8px;
-}
-#logo_JF {
-    width: 100%;
-}
+    #content h2, .buttonStyle {
+        background-color: #d7c6ac;
+        border-radius: 3px;
+        width: fit-content;
+        padding: 5px;
+        font-size: 1.2em;
+        margin: 10px 30px;
+        color: white;
+        font-weight: bold;
+        border: none;
+    }
+        .buttonStyle:hover {
+            background-color: #a5957d;
+            text-decoration: none;
+            color: white;
+        }
+    #content h3 {
+        font-family: Copperplate Gothic;
+        font-size: 1.8em;
+    }
+    .smallInfosText {
+        color: grey;
+        font-size: 0.7em;
+    }
 
 /* NEWS */
 
-.news {
-    margin: auto;
+.news, #commentDisplay {
+    margin: 20px 30px 30px;
+    background-color: white;
     border-radius: 5px;
+    padding: 10px;
+    text-align: center;
 }
     .news h3 {
-        padding: 10px;
-        background-color: violet;
-        color: white;
         font-size: 0.9em;
-        margin-bottom: 0px;
         text-align: center;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
     }
     .news p {
-        background-color: mistyrose;
-        margin-top: 0px;
-        padding: 15px;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
+        text-align: justify;
+        padding: 10px;
     }
-a {
-    text-decoration: none;
-    color: blue;
-}
 
 /* COMMENTS */
 
-#commentDisplay {
-    flex-direction: column;
-    background-color: mistyrose;
-    border-radius : 5px;
-    padding: 15px;
+.commentStyle {
+    background-color: #d7c6ac;
+    border-radius: 5px;
+    padding: 5px 0;
+    margin: 15px 5px;
 }
+    .fa-exclamation-circle {
+        color: white;
+    }
+    .commentStyle p {
+        margin-bottom: 0;
+    }
     #formComment {
         margin: 15px 0;
     }
@@ -92,30 +139,25 @@ a {
         #submitComment {
             border-radius: 5px;
             border: none;
-            background-color: violet;
+            margin-top: 15px;
         }
 
-/* CONNEXION, CONTACT & SOCIAL NETWORK*/
+/* MODAL */
 
-.admin {
-    background-color: mistyrose;
-    border-radius : 5px;
-    padding: 8px;
+#modalSignal {
+    display: flex;
 }
-
-#contact a {
-    color: black;
-}
-    #contact a:hover {
-        text-decoration: none;
+    .modal-content {
+        padding: 10px;
+    }
+    #modalSignal button {
+        margin: 0;
+        align-self: flex-end;
     }
 
-#socialNetwork {
-    color: blue;
-}
+/* CONNEXION ADMIN */
 
-/* FOOTER */
-
-.footerRow {
-    justify-content: center;
+#connexionAdmin {
+    display: flex;
+    justify-content: space-around;
 }
