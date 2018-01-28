@@ -12,7 +12,7 @@ while ($data = $posts->fetch()) {
 		<h3><?php echo htmlspecialchars($data['title']); ?></h3>
 		<i class="smallInfosText">publié le <?php echo htmlspecialchars($data['creation_date']); ?></i>
 		<?php echo $data['content']; ?>
-		<a class="buttonStyle" href="index.php?action=post&amp;id=<?php echo $data['id'] ?>">Commentaires</a>
+		<a class="buttonStyle" href="index.php?action=post&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
 	</div>
 <?php
 }

@@ -23,7 +23,7 @@
 		                <p>Administration</p>
 
 		                <a href="index.php?action=adminViewPosts" class="buttonStyle" method="post">Billets</a>
-		                <a href="index.php?action=adminViewComments" class="buttonStyle" method="post">Commentaires</a>
+		                <a href="index.php?action=adminViewComments" class="buttonStyle" method="post">Commentaires signalés</a>
 		                <a href="index.php?action=listPosts" class="buttonStyle">Déconnexion</a>
                     </div>
 

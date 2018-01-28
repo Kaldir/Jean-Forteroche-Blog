@@ -1,8 +1,8 @@
 <?php $title = 'Gestion des commentaires'; ?>
 
-<?php ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
+<?php ob_start(); ?>
 
-<!-- CONNEXION ADMIN -->
+<!-- AFFICHAGE DES BILLETS AYANT DES COMMENTAIRES SIGNALES -->
 <?php
 if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas vide
 ?>
@@ -19,25 +19,21 @@ if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas 
 }
 ?>
 
-<!-- AFFICHAGE DES COMMENTAIRES -->
-<h2>Commentaires</h2>
+<!-- AFFICHAGE DES COMMENTAIRES SIGNALES -->
+<h2>Commentaires signalés</h2>
 
 <div>
-    <form action="index.php?action=addComment&amp;id=<?php echo htmlspecialchars($post['id']); ?>" method="post" id="formComment">
-        <label for="author">Auteur</label><br />
-        <input type="text" id="author" name="author" /><br />
-        <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea><br />
-        <input type="submit" class="buttonStyle" />
-    </form>
-
     <?php
     while ($comment = $comments->fetch()) {
         ?>
         <p>
             <strong><?php echo htmlspecialchars($comment['author']); ?></strong>
             <i class="smallInfosText">posté le <?php echo htmlspecialchars($comment['comment_date']); ?> </i>
-            <a href="index.php?action=displayCommentsForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>">(modifier)</a>
+
+            <a href="index.php?action=displayCommentsForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+            <a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($comment['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
+
             <?php echo nl2br(htmlspecialchars($comment['comment'])); ?>
         </p>
     <?php

@@ -14,10 +14,12 @@ if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas 
         <i class="smallInfosText">publié le <?php echo htmlspecialchars($post['creation_date']); ?> </i>
         
         <?php echo nl2br($post['content']); ?>
+        <a href="" class="buttonStyle"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+        <a href="" class="buttonStyle"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
     </div>
 <?php
 } else {
-    echo "<p>Ce billet n'existe pas !</p>";
+    header('Location: index.php'); // si un id de billet inexistant est rentré manuellement dans l'url, l'user est redirigé sur la page d'accueil)
 }
 ?>
 
@@ -29,7 +31,7 @@ if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas 
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" />
         <label for="comment">Commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea>
+        <input id="comment" name="comment"></input>
         <input type="submit" class="buttonStyle" />
     </form>
 
@@ -42,7 +44,7 @@ if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas 
             <a href="index.php?action=signalComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;postId=<?php echo htmlspecialchars($_GET['id']); ?>"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
             <strong><?php echo htmlspecialchars($comment['author']); ?></strong>
             <i class="smallInfosText">- <?php echo htmlspecialchars($comment['comment_date']); ?></i>
-            <?php echo nl2br($comment['comment']); ?>
+            <p><?php echo htmlspecialchars($comment['comment']); ?></p>
         </div>
     <?php
     }
@@ -59,7 +61,7 @@ if ($signalised) {
         <button type="button" class="btn btn-secondary buttonStyle" data-dismiss="modal">Ok !</button>
       </div>
     </div>
-  </div>
+</div>
 <?php
 }
 ?>
@@ -73,7 +75,7 @@ if ($signalised) {
 <?php
 if ($signalised) {
     ?>
-        <script> $('#modalSignal').modal('show'); </script>
+        <script> $('#modalSignal').modal('show'); </script> <!-- display la modal lorsqu'un commentaire est signalé (passe en true dans la bdd) -->
 <?php
 }
 ?>

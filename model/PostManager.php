@@ -46,11 +46,26 @@ class PostManager extends Manager
         return $modify;
     }
 
-    public function deletePost($postId) {
+    public function deletePost($postId) { // permet de supprimer un billet et ses commentaires associés de la bdd
         $db = $this->dbConnect();
+        $comment = $db->prepare('DELETE FROM comments WHERE id_post = ?');
+        $comment->execute(array($postId));
         $post = $db->prepare('DELETE FROM posts WHERE id = ?');
         $delete = $post->execute(array($postId));
 
-        return $delete;    
+        return $delete;
+    }
+
+    public function getExcerpt($str, $startPos=0, $maxLength=100) { // Affiche un extrait d'un billet
+        if (strlen($str) > $maxLength) {
+            $excerpt   = substr($str, $startPos, $maxLength-3);
+            $lastSpace = strrpos($excerpt, ' ');
+            $excerpt   = substr($excerpt, 0, $lastSpace);
+            $excerpt  .= '...';
+        } else {
+            $excerpt = $str;
+        }
+        
+        return $excerpt;
     }
 }

@@ -13,7 +13,7 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'post') {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
             if (isset($_GET['signaled'])) {
-                $frontendControler->post($_GET['id'], true); // si signalised existe, sa valeur est true
+                $frontendControler->post($_GET['id'], true); // si signaled existe, sa valeur est true
             } else {
                 $frontendControler->post($_GET['id']); // sinon, elle garde sa valeur par défaut (false)
             }

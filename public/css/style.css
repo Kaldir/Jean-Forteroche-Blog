@@ -45,6 +45,8 @@ a:hover {
         }
         #admin a {
             align-self: center;
+            width: 100%;
+            text-align: center;
         }
     #adminPart {
         background-color: rgba(255, 255, 255, 0.5);
@@ -125,7 +127,7 @@ a:hover {
     margin: 15px 5px;
 }
     .fa-exclamation-circle {
-        color: white;
+        color: grey;
     }
     .commentStyle p {
         margin-bottom: 0;
@@ -133,7 +135,7 @@ a:hover {
     #formComment {
         margin: 15px 0;
     }
-        #author, #comment {
+        #author, #comment, #title {
             width: 100%;
         }
         #submitComment {
@@ -159,5 +161,9 @@ a:hover {
 
 #connexionAdmin {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
 }
+    #connexionAdmin .buttonStyle {
+        margin: 0;
+        align-self: flex-end;
+    }
