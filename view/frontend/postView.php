@@ -14,8 +14,10 @@ if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas 
         <i class="smallInfosText">publié le <?php echo htmlspecialchars($post['creation_date']); ?> </i>
         
         <?php echo nl2br($post['content']); ?>
-        <a href="" class="buttonStyle"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+<!--        <a href="" class="buttonStyle"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
         <a href="" class="buttonStyle"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+PAGINATION A GERER POUR PRECEDENT/SUIVANT
+-->
     </div>
 <?php
 } else {

@@ -7,9 +7,10 @@ require_once('./model/CommentManager.php');
 
 class BackendControler
 {
-	public function adminViewPosts() {
+	public function adminViewPosts($zone) {
 		$postManager = new \Kldr\Blog\Model\PostManager(); // Création d'un objet
-		$posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
+		$posts = $postManager->getPosts($zone); // Appel d'une fonction de cet objet
+		$nbPost = $postManager->nbPost();
 
 		require('./view/backend/adminPosts.php');
 	}

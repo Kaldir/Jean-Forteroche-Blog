@@ -1,6 +1,7 @@
-<?php $title = 'Miniblog'; ?>
-
-<?php ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
+<?php $title = 'Miniblog';
+require('./view/pagination.php');
+ob_start(); // Permet de mémoriser le code html qui suit en le mettant dans la variable "content"
+echo $pagination; ?>
 
 <h2>Dernières publications</h2>
 
@@ -11,14 +12,14 @@ while ($data = $posts->fetch()) {
 	<div class="news">
 		<h3><?php echo htmlspecialchars($data['title']); ?></h3>
 		<i class="smallInfosText">publié le <?php echo htmlspecialchars($data['creation_date']); ?></i>
-		<?php echo $data['content']; ?>
+		<p><?php echo $postManager->getExcerpt($data['content']); ?></p>
 		<a class="buttonStyle" href="index.php?action=post&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
 	</div>
 <?php
 }
-$posts->closeCursor(); // Terminer le traitement de la requête
+$posts->closeCursor(); // Termine le traitement de la requête
 ?>
-			
-<?php $content = ob_get_clean(); ?> <!-- restitue le code html de la variable "content" (voir ligne 3) -->
 
-<?php require('./view/template.php'); ?>
+<?php echo $pagination;		
+$content = ob_get_clean(); // restitue le code html de la variable "content" (voir ligne 3)
+require('./view/template.php'); ?>

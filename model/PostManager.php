@@ -5,9 +5,11 @@ require_once("Manager.php");
 
 class PostManager extends Manager
 {
-    public function getPosts() { // renvoie la liste des posts
+    public function getPosts($zone) { // renvoie la liste des posts
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5');
+        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS creation_date FROM posts ORDER BY creation_date DESC LIMIT ?, 5');
+        $req->bindValue(1, $zone, \PDO::PARAM_INT); // permet d'insérer la variable $zone dans la requête sql (en tant que nombre et pas string)
+        $req->execute();
 
         return $req;
     }
@@ -56,16 +58,19 @@ class PostManager extends Manager
         return $delete;
     }
 
-    public function getExcerpt($str, $startPos=0, $maxLength=100) { // Affiche un extrait d'un billet
-        if (strlen($str) > $maxLength) {
-            $excerpt   = substr($str, $startPos, $maxLength-3);
-            $lastSpace = strrpos($excerpt, ' ');
-            $excerpt   = substr($excerpt, 0, $lastSpace);
-            $excerpt  .= '...';
-        } else {
-            $excerpt = $str;
+    public function nbPost() { // Compte le nombre total de billets contenu dans la bdd
+        $db = $this->dbConnect();
+        $req = $db->query('SELECT COUNT(*) FROM posts');
+        $req = $req->fetchColumn();
+
+        return $req;
+    }
+
+    public function getExcerpt($string, $start = 0, $maxLength = 300) { // Affiche un extrait d'un billet et donne des valeurs par défaut qui sont modifiable lorsque on fait appel à la méthode (à cause de tinyMCE, il faut penser à prendre en compte les balises html, non visible sur le site mais considérées par le maxLength)
+        if (strlen($string) > $maxLength) { // si le texte est supérieur à 100 caractères
+            $string = substr($string, $start, $maxLength); // affiche le texte, depuis le premier caractère, jusqu'à 100 caractères
+            $string  .= '...';
         }
-        
-        return $excerpt;
+        return $string;
     }
 }

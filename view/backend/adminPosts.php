@@ -1,7 +1,6 @@
-<?php $title = 'Gestion des billets'; ?>
-
-<?php ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
-
+<?php $title = 'Gestion des billets';
+require('./view/pagination.php');
+ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
     
 <!-- MODIFICATION DU POST -->
 <h2>Ajout d'un billet</h2>
@@ -17,6 +16,8 @@
         </div>
     </form>
 </div>
+
+<?php echo $pagination; ?>
 
 <h2>Billets en ligne</h2>
 
@@ -39,6 +40,6 @@ while ($post = $posts->fetch()) {
 $posts->closeCursor(); // Terminer le traitement de la requête
 ?>
 
-<?php $content = ob_get_clean(); ?>
-
-<?php require('./view/backend/adminTemplate.php'); ?>
+<?php echo $pagination;
+$content = ob_get_clean();
+require('./view/backend/adminTemplate.php'); ?>

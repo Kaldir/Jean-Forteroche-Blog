@@ -7,7 +7,13 @@ $backendControler = new \Kldr\Blog\Controler\BackendControler();
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'listPosts') {
-        $frontendControler->listPosts();
+        if (!isset($_GET['page']) || $_GET['page'] < 0) { // Si la variable page n'est pas définie
+            $page = 1;
+        } else {
+            $page = htmlspecialchars($_GET['page']); // Sinon lecture de la page
+        }
+        $zone = 5 * ($page - 1); // Calcul du facteur multiplicateur pour determinez la zone
+        $frontendControler->listPosts($zone);
     }
 
     elseif ($_GET['action'] == 'post') {
@@ -77,7 +83,13 @@ if (isset($_GET['action'])) {
         $backendControler->adminForm();
     
     } elseif ($_GET['action'] == 'adminViewPosts') {
-        $backendControler->adminViewPosts();
+        if (!isset($_GET['page']) || $_GET['page'] < 0) { // Si la variable page n'est pas définie
+        $page = 1;
+        } else {
+            $page = htmlspecialchars($_GET['page']); // Sinon lecture de la page
+        }
+        $zone = 5 * ($page - 1); // Calcul du facteur multiplicateur pour determinez la zone
+        $backendControler->adminViewPosts($zone);
 
     } elseif ($_GET['action'] == 'adminViewComments') {
         $backendControler->adminComments();
@@ -89,5 +101,11 @@ if (isset($_GET['action'])) {
     }
 
 } else {
-    $frontendControler->listPosts();
+    if (!isset($_GET['page']) || $_GET['page'] < 0) { // Si la variable page n'est pas définie
+        $page = 1;
+    } else {
+        $page = htmlspecialchars($_GET['page']); // Sinon lecture de la page
+    }
+    $zone = 5 * ($page - 1); // Calcul du facteur multiplicateur pour determinez la zone
+    $frontendControler->listPosts($zone);
 }

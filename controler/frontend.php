@@ -1,4 +1,4 @@
-<?php //CONTROLER
+<?php // CONTROLER
 namespace Kldr\Blog\Controler;
 
 // Chargement des classes
@@ -7,9 +7,10 @@ require_once('./model/CommentManager.php');
 
 class FrontendControler
 {
-	public function listPosts() {
+	public function listPosts($zone) {
 		$postManager = new \Kldr\Blog\Model\PostManager(); // Création d'un objet
-		$posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
+		$posts = $postManager->getPosts($zone); // Appel d'une méthode et de son argument
+		$nbPost = $postManager->nbPost();
 
 		require('./view/frontend/listPostsView.php');
 	}

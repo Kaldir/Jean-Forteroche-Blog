@@ -11,8 +11,8 @@
 	</head>
 
 	<body>
-		<div class="container-fluid d-flex introContainer">
-			<div class="row">
+		<div class="container-fluid">
+			<div class="row introContainer">
 				<div id="header" class="col-md-4">
 					<div id="titleBlog">
 			            <a href="index.php"><img id="leather" src="./public/img/leather2.png" />
