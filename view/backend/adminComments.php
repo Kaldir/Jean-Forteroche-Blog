@@ -1,6 +1,5 @@
-<?php $title = 'Gestion des commentaires'; ?>
-
-<?php ob_start(); ?>
+<?php $title = 'Gestion des commentaires';
+ob_start(); ?>
 
 <!-- AFFICHAGE DES BILLETS AYANT DES COMMENTAIRES SIGNALES -->
 <?php
@@ -41,6 +40,5 @@ if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas 
     ?>
 </div>
 
-<?php $content = ob_get_clean(); ?>
-
-<?php require('./view/backend/adminTemplate.php'); ?>
+<?php $content = ob_get_clean();
+require('./view/backend/adminTemplate.php'); ?>

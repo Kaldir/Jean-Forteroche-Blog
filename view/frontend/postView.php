@@ -1,6 +1,5 @@
-<?php $title = "Commentaires" ?>
-
-<?php ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
+<?php $title = "Commentaires";
+ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
 
 <a href="index.php" class="buttonStyle">Retour</a>
 
@@ -68,13 +67,10 @@ if ($signalised) {
 }
 ?>
 
-<?php $content = ob_get_clean(); ?>
+<?php $content = ob_get_clean();
+require('./view/template.php');
 
-<?php require('./view/template.php'); ?>
-
-<!-- on déclare ce script après l'exécution de Jquery qui se trouve dans template.php -->
-
-<?php
+// on déclare ce script après l'exécution de Jquery qui se trouve dans template.php
 if ($signalised) {
     ?>
         <script> $('#modalSignal').modal('show'); </script> <!-- display la modal lorsqu'un commentaire est signalé (passe en true dans la bdd) -->

@@ -1,6 +1,5 @@
-<?php $title = 'Modifier un commentaire'; ?>
-
-<?php ob_start(); ?>
+<?php $title = 'Modifier un commentaire';
+ob_start(); ?>
            
 <!-- MODIFICATION DU COMMENTAIRE -->
 <h2>Modifier le commentaire</h2>
@@ -17,6 +16,5 @@
     </form>
 </div>
 
-<?php $content = ob_get_clean(); ?>
-
-<?php require('./view/template.php'); ?>
+<?php $content = ob_get_clean();
+require('./view/template.php'); ?>

@@ -1,6 +1,5 @@
-<?php $title = 'Modifier un billet'; ?>
-
-<?php ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
+<?php $title = 'Modifier un billet';
+ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
            
 <!-- MODIFICATION DU COMMENTAIRE -->
 <h2>Modifier le billet</h2>
@@ -21,6 +20,5 @@
     </form>
 </div>
 
-<?php $content = ob_get_clean(); ?>
-
-<?php require('./view/backend/adminTemplate.php'); ?>
+<?php $content = ob_get_clean();
+require('./view/backend/adminTemplate.php'); ?>

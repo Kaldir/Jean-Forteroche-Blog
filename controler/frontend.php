@@ -1,13 +1,14 @@
 <?php // CONTROLER
 namespace Kldr\Blog\Controler;
 
-// Chargement des classes
+// Loading classes
 require_once('./model/PostManager.php');
 require_once('./model/CommentManager.php');
 
 class FrontendControler
 {
-	public function listPosts($zone) {
+// POSTS
+	public function listPosts($zone = 0) {
 		$postManager = new \Kldr\Blog\Model\PostManager(); // Création d'un objet
 		$posts = $postManager->getPosts($zone); // Appel d'une méthode et de son argument
 		$nbPost = $postManager->nbPost();
@@ -25,6 +26,14 @@ class FrontendControler
 		require('./view/frontend/postView.php');
 	}
 
+// COMMENTS
+	public function displayCommentsForm($commentId) {
+		$commentManager = new \Kldr\Blog\Model\CommentManager();
+		$comment = $commentManager->selectComment($commentId);
+		
+		require('./view/backend/commentModify.php');
+	}
+
 	public function addComment($postId, $author, $comment) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 
@@ -37,16 +46,21 @@ class FrontendControler
 	    }
 	}
 
-	public function displayCommentsForm($commentId) {
-		$commentManager = new \Kldr\Blog\Model\CommentManager();
-		$comment = $commentManager->selectComment($commentId);
-		
-		require('./view/backend/commentModify.php');
-	}
-
 	public function signal($commentId, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$commentManager->signalisedComment($commentId);
 		header('Location: index.php?action=post&signaled&id=' . $postId);
 	}
+
+// ADMIN ACCOUNT
+	public function checkLogin($password, $email) {
+		$adminManager = new \Kldr\Blog\Model\AdminManager();
+		$adminInfo = $adminManager->checkLogin($_POST['password'], $_POST['email']);
+        if (is_array($adminInfo)) {
+            $_SESSION['admin'] = true;
+            $_SESSION['pseudo'] = $adminInfo['pseudo'];
+            $_SESSION['email'] = $adminInfo['email'];
+        	header('Location: index.php?action=adminIndex');
+        }
+	}	
 }
