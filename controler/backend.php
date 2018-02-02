@@ -28,10 +28,8 @@ class BackendControler
 
 	public function displayPostForm($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
-	    $post = $postManager->selectPost($postId);
-
+	    $post = $postManager->getPost($postId);
 		require('./view/backend/postModify.php');
-
 	    if ($post == false) {
 	        throw new Exception('Impossible d\'éditer le billet');
 	    }
@@ -39,9 +37,7 @@ class BackendControler
 
 	public function addPost($title, $content) {
 			$postManager = new \Kldr\Blog\Model\PostManager();
-
 			$success = $postManager->postPost($title, $content);
-
 			if ($success == false) {
 		        throw new Exception('Impossible d\'ajouter le billet !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
 		    } else {
@@ -51,9 +47,7 @@ class BackendControler
 
 	public function editPost($title, $content, $postId) {
 			$postManager = new \Kldr\Blog\Model\PostManager();
-
 			$success = $postManager->editPost($title, $content, $postId);
-
 			if ($success == false) {
 		        throw new Exception('Impossible d\'éditer le billet !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
 		    } else {
@@ -75,9 +69,7 @@ class BackendControler
 
 	public function modifyComment($commentId, $comment, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
-
 	    $editComment = $commentManager->editComment($commentId, $comment);
-	 
 	    if ($editComment == false) {
 	        throw new Exception('Impossible d\'éditer le commentaire');
 	    }
@@ -104,12 +96,12 @@ class BackendControler
 		header('Location: index.php?action=adminAccountModifications');
 	}
 
-		public function passUpdate($password, $newPassword) {
+	public function passUpdate($password, $newPassword) {
 		$adminManager = new \Kldr\Blog\Model\AdminManager();
 		$passUp = $adminManager->passUpdate($password, $newPassword);
-		if ($passUp == true && $newPassword == $checkPassword) {
-			$_SESSION['password'] = $newPassword;
+		if ($passUp == false) {
+	    	throw new Exception('Impossible de modifier le mot de passe !');
 		}
-		header('Location: index.php?action=adminAccountModifications');
+		header('Location: index.php?action=adminAccountModifications&success=true');
 	}
 }

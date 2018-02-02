@@ -31,15 +31,13 @@ class AdminManager extends Manager
         return false;
     }
 
-        public function passUpdate($passHash, $passHashNew, $passHashCheck) { // pour gérer les modifs de mdp du compte admin
+        public function passUpdate($password, $newPassword) { // pour gérer les modifs de mdp du compte admin
         $db = $this->dbConnect();
-        $checkLogin = $this->checkLogin($passHash, $_SESSION['email']);
+        $checkLogin = $this->checkLogin($password, $_SESSION['email']);
         if (is_array($checkLogin)) {
-            $passHash = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hachage du mot de passe
-            $passHashNew = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
-            $passHashCheck = password_hash($_POST['checkPassword'], PASSWORD_DEFAULT);
+            $newPassword = password_hash($newPassword, PASSWORD_DEFAULT); // Hachage du mot de passe
             $req = $db->prepare('UPDATE admin SET password = ? WHERE email = ?');
-            $passUp = $req->execute(array($passHash, $_SESSION['email']));
+            $passUp = $req->execute(array($newPassword, $_SESSION['email']));
             return $passUp;
         }
     return false;

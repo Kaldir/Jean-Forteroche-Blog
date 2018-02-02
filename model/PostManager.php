@@ -7,7 +7,7 @@ class PostManager extends Manager
 {
     public function getPosts($zone) { // renvoie la liste des posts
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS creation_date FROM posts ORDER BY creation_date DESC LIMIT ?, 5');
+        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT ?, 5');
         $req->bindValue(1, $zone, \PDO::PARAM_INT); // permet d'insérer la variable $zone dans la requête sql (en tant que nombre et pas string)
         $req->execute();
 
@@ -16,7 +16,7 @@ class PostManager extends Manager
 
     public function getPost($postId) { // récuperation d'un post en fonction de son id
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS creation_date FROM posts WHERE id = ?');
+        $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS creation_date_fr FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $post = $req->fetch();
         
@@ -29,15 +29,6 @@ class PostManager extends Manager
         $affectedLines = $post->execute(array($title, $content));
    
         return $affectedLines;
-    }
-
-    public function selectPost($postId) {
-        $db = $this->dbConnect();
-        $post = $db->prepare('SELECT id, title, content FROM posts WHERE id = ?');
-        $post->execute(array($postId));
-        $post = $post->fetch();
-    
-        return $post;
     }
 
     public function editPost($title, $content, $postId) { // fonction qui permet de modifier un post

@@ -27,7 +27,7 @@ while ($post = $posts->fetch()) {
 
 	<div class="news">
 		<h3><?php echo htmlspecialchars($post['title']); ?></h3>
-		<i class="smallInfosText">posté le <?php echo htmlspecialchars($post['creation_date']); ?></i>
+		<i class="smallInfosText">posté le <?php echo htmlspecialchars($post['creation_date_fr']); ?></i>
 
 		<a href="index.php?action=displayPostForm&amp;id=<?php echo htmlspecialchars($post['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 

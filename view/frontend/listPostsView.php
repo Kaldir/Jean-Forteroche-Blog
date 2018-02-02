@@ -11,7 +11,7 @@ while ($data = $posts->fetch()) {
 ?>
 	<div class="news">
 		<h3><?php echo htmlspecialchars($data['title']); ?></h3>
-		<i class="smallInfosText">publié le <?php echo htmlspecialchars($data['creation_date']); ?></i>
+		<i class="smallInfosText">publié le <?php echo htmlspecialchars($data['creation_date_fr']); ?></i>
 		<p><?php echo $postManager->getExcerpt($data['content']); ?></p>
 		<a class="buttonStyle" href="index.php?action=post&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
 	</div>

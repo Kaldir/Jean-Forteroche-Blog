@@ -10,7 +10,7 @@ if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas 
     <div class="news">
         <h3><?php echo htmlspecialchars($post['title']); ?></h3>
         
-        <i class="smallInfosText">publié le <?php echo htmlspecialchars($post['creation_date']); ?> </i>
+        <i class="smallInfosText">publié le <?php echo htmlspecialchars($post['creation_date_fr']); ?> </i>
         
         <?php echo nl2br($post['content']); ?>
 <!--        <a href="" class="buttonStyle"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>

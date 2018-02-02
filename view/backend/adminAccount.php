@@ -1,5 +1,10 @@
 <?php $title = 'Gestion du compte administrateur';
-ob_start(); ?>
+ob_start();
+
+if (!empty($_GET['success'])) { // si la variable n'est pas vide (c'est à dire que la méthode passUpdate du backend est true)
+    echo '<div class="news">Mot de passe mis à jour avec succès !</div>';
+}
+?>
 
 <!-- CONNEXION ADMIN -->
 <h2>Modification du pseudo</h2>
@@ -12,7 +17,7 @@ ob_start(); ?>
         <input type="text" id="newPseudo" name="newPseudo" required /><br />
         <label for="password">Mot de passe actuel</label>
         <input type="password" id="password" name="password" required /><br />
-        <input type="submit" name="connexion" class="buttonStyle" value="Connexion" />
+        <input type="submit" name="connexion" class="buttonStyle" value="Modifier" />
     </form>
 </div>
 
@@ -26,7 +31,7 @@ ob_start(); ?>
         <input type="password" id="newPassword" name="newPassword" required /><br />
         <label for="newPassword">Confirmation du nouveau mot de passe</label>
         <input type="password" id="checkPassword" name="checkPassword" required /><br />
-        <input type="submit" name="connexion" class="buttonStyle" value="Connexion" />
+        <input type="submit" name="connexion" class="buttonStyle" value="Modifier" />
     </form>
 </div>
 

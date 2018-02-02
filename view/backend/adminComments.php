@@ -7,7 +7,7 @@ if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas 
 ?>
     <div class="news">
         <h3><?php echo htmlspecialchars($post['title']); ?></h3>
-        <i class="smallInfosText">posté le <?php echo htmlspecialchars($post['creation_date']); ?> </i>
+        <i class="smallInfosText">posté le <?php echo htmlspecialchars($post['creation_date_fr']); ?> </i>
         <p>
         <?php echo nl2br (htmlspecialchars($post['content'])); ?> <!-- nl2br gère les retour à la ligne dans le contents -->
         </p>
