@@ -14,6 +14,15 @@ ob_start(); ?>
     </form>
 </div>
 
-<?php echo $message; // Affiche un message d'erreur si le mdp et/id sont incorrects
-$content = ob_get_clean();
+<?php
+if ($message) { // Affiche un message d'erreur si le mdp et/id sont incorrects
+?>
+<div class="news">
+	<p>Votre identifiant ou votre mot de passe est incorrect !</p>
+</div>
+<?php
+}
+?>
+
+<?php $content = ob_get_clean();
 require('./view/template.php'); ?>

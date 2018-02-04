@@ -1,6 +1,6 @@
 <?php
 $actionAdmin = '';
-if ($_SESSION['admin'] == true) {
+if (!empty($_SESSION['admin'])) {
 	$actionAdmin = 'action=adminViewPosts&';
 }
 $pagination = '<div class="pagination">';

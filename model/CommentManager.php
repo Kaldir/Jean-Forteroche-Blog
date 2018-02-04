@@ -8,7 +8,7 @@ class CommentManager extends Manager
     public function getComments($postId) // récupère les commentaires associés à un id de post
     {
 		$db = $this->dbConnect();
-	    $comments = $db->prepare('SELECT id, id_post, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS comment_date FROM comments WHERE id_post = ? ORDER BY comment_date DESC');
+	    $comments = $db->prepare('SELECT id, id_post, author, comment, signalised, DATE_FORMAT(comment_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS comment_date_fr FROM comments WHERE id_post = ? ORDER BY comment_date DESC');
 	    $comments->execute(array($postId));
 
     return $comments;
@@ -51,4 +51,19 @@ class CommentManager extends Manager
 	return $signal;
 	}
 
+	    public function getCommentsSignalised() // récupère les commentaires signalés associés à un id de post
+    {
+		$db = $this->dbConnect();
+	    $comments = $db->query('SELECT comments.id, posts.title, comments.id_post, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS comment_date_fr FROM comments INNER JOIN posts ON posts.id = comments.id_post WHERE signalised = 1 ORDER BY comment_date DESC');
+
+    return $comments;
+	}
+
+    public function deleteComment($commentId) { // permet de supprimer un commentaire de la bdd
+        $db = $this->dbConnect();
+        $comment = $db->prepare('DELETE FROM comments WHERE id = ?');
+        $comment->execute(array($commentId));
+
+        return $delete;
+    }
 }

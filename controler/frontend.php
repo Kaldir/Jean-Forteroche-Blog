@@ -27,13 +27,6 @@ class FrontendControler
 	}
 
 // COMMENTS
-	public function displayCommentsForm($commentId) {
-		$commentManager = new \Kldr\Blog\Model\CommentManager();
-		$comment = $commentManager->selectComment($commentId);
-		
-		require('./view/backend/commentModify.php');
-	}
-
 	public function addComment($postId, $author, $comment) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 
@@ -49,7 +42,7 @@ class FrontendControler
 	public function signal($commentId, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$commentManager->signalisedComment($commentId);
-		header('Location: index.php?action=post&signaled&id=' . $postId);
+		header('Location: index.php?action=post&signaled=true&id=' . $postId);
 	}
 
 // ADMIN ACCOUNT
@@ -61,6 +54,8 @@ class FrontendControler
             $_SESSION['pseudo'] = $adminInfo['pseudo'];
             $_SESSION['email'] = $adminInfo['email'];
         	header('Location: index.php?action=adminIndex');
+        } else {
+    		header('Location: index.php?action=adminLogin');
         }
 	}	
 }

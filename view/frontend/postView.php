@@ -44,7 +44,7 @@ PAGINATION A GERER POUR PRECEDENT/SUIVANT
         <div class="commentStyle">
             <a href="index.php?action=signalComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;postId=<?php echo htmlspecialchars($_GET['id']); ?>"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
             <strong><?php echo htmlspecialchars($comment['author']); ?></strong>
-            <i class="smallInfosText">- <?php echo htmlspecialchars($comment['comment_date']); ?></i>
+            <i class="smallInfosText">- <?php echo htmlspecialchars($comment['comment_date_fr']); ?></i>
             <p><?php echo htmlspecialchars($comment['comment']); ?></p>
         </div>
     <?php
@@ -72,7 +72,7 @@ require('./view/template.php');
 
 // on déclare ce script après l'exécution de Jquery qui se trouve dans template.php
 if ($signalised) {
-    ?>
+?>
         <script> $('#modalSignal').modal('show'); </script> <!-- display la modal lorsqu'un commentaire est signalé (passe en true dans la bdd) -->
 <?php
 }

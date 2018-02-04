@@ -22,9 +22,18 @@ class BackendControler
 		$postManager = new \Kldr\Blog\Model\PostManager(); // Création d'un objet
 		$posts = $postManager->getPosts($zone); // Appel d'une fonction de cet objet
 		$nbPost = $postManager->nbPost();
-
 		require('./view/backend/adminPosts.php');
 	}
+
+	public function adminPost($postId) {
+		$postManager = new \Kldr\Blog\Model\PostManager();
+		$commentManager = new \Kldr\Blog\Model\CommentManager();
+
+		$post = $postManager->getPost($postId);
+		$comments = $commentManager->getComments($postId);
+
+		require('./view/backend/adminPostView.php');
+		}
 
 	public function displayPostForm($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
@@ -58,24 +67,38 @@ class BackendControler
 	public function deletePost($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 	    $deletePost = $postManager->deletePost($postId);
-	 
-		header('Location: index.php?action=adminViewPosts');
+	 	header('Location: index.php?action=adminViewPosts');
 	}
 
 // COMMENTS
 	public function adminComments() {
+		$commentManager = new \Kldr\Blog\Model\CommentManager();
+		$comments = $commentManager->getCommentsSignalised();
 		require('./view/backend/adminComments.php');
 	}
 
-	public function modifyComment($commentId, $comment, $postId) {
+	public function editComment($commentId, $comment) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 	    $editComment = $commentManager->editComment($commentId, $comment);
 	    if ($editComment == false) {
 	        throw new Exception('Impossible d\'éditer le commentaire');
 	    }
 	    else {
-		    header('Location: index.php?action=post&id=' . $postId);
+		    header('Location: index.php?action=adminViewComments');
 	    }
+	}
+
+	public function deleteComment($commentId) {
+		$commentManager = new \Kldr\Blog\Model\CommentManager();
+	    $deleteComment = $commentManager->deleteComment($commentId);
+	 	header('Location: index.php?action=adminViewComments');
+	}
+
+	public function displayCommentsForm($commentId) {
+		$commentManager = new \Kldr\Blog\Model\CommentManager();
+		$comment = $commentManager->selectComment($commentId);
+		
+		require('./view/backend/commentModify.php');
 	}
 
 // ADMIN ACCOUNT

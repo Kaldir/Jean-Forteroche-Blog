@@ -22,18 +22,19 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
 <h2>Billets en ligne</h2>
 
 <?php
-while ($post = $posts->fetch()) {
+while ($data = $posts->fetch()) {
 ?>
 
 	<div class="news">
-		<h3><?php echo htmlspecialchars($post['title']); ?></h3>
-		<i class="smallInfosText">posté le <?php echo htmlspecialchars($post['creation_date_fr']); ?></i>
+		<h3><?php echo htmlspecialchars($data['title']); ?></h3>
+		<i class="smallInfosText">publié le <?php echo htmlspecialchars($data['creation_date_fr']); ?></i>
 
-		<a href="index.php?action=displayPostForm&amp;id=<?php echo htmlspecialchars($post['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+		<a href="index.php?action=displayPostForm&amp;id=<?php echo htmlspecialchars($data['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-		<a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($post['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce billet ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
+		<a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($data['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce billet ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
-		<p><?php echo $post['content']; ?></p>
+        <p><?php echo $postManager->getExcerpt($data['content']); ?></p>
+        <a class="buttonStyle" href="index.php?action=adminPost&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
 	</div>
 <?php
 }

@@ -31,13 +31,6 @@ if (!empty($_GET['action'])) {
             }
 
     // FRONT COMMENTS
-        } elseif ($_GET['action'] == 'displayCommentsForm') {
-            if (!empty($_GET['id']) && $_GET['id'] > 0) {
-                $frontendControler->displayCommentsForm($_GET['id']);
-            } else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
-
         } elseif ($_GET['action'] == 'addComment') {
             if (!empty($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
@@ -75,6 +68,9 @@ if (!empty($_GET['action'])) {
         } elseif ($_GET['action'] == 'displayPostForm') {
             $backendControler->displayPostForm($_GET['id']);
 
+        } elseif ($_GET['action'] == 'adminPost') {
+            $backendControler->adminPost($_GET['id']);
+
         } elseif ($_GET['action'] == 'addPost') {
             $backendControler->addPost($_POST['title'], $_POST['content']);
 
@@ -92,12 +88,22 @@ if (!empty($_GET['action'])) {
         } elseif ($_GET['action'] == 'adminViewComments') {
             $backendControler->adminComments();
 
-        } elseif ($_GET['action'] == 'editForm') {
-                if (!empty($_GET['id']) && $_GET['id'] > 0 && !empty($_POST['comment']) && !empty($_POST['id_post']) && $_POST['id_post'] > 0) {
-                $backendControler->modifyComment($_GET['id'], $_POST['comment'], $_POST['id_post']);
-            } else {             
-                throw new Exception('Erreur dans la saisie du formulaire');
+        } elseif ($_GET['action'] == 'displayCommentsForm') {
+            if (!empty($_GET['id']) && $_GET['id'] > 0) {
+                $backendControler->displayCommentsForm($_GET['id']);
+            } else {
+                throw new Exception('Aucun identifiant envoyé');
             }
+
+        } elseif ($_GET['action'] == 'editComment') {
+                if (!empty($_POST['id']) && $_POST['id'] > 0 && !empty($_POST['comment']) && !empty($_POST['id_post']) && $_POST['id_post'] > 0) {
+                $backendControler->editComment($_POST['id'], $_POST['comment'], $_POST['id_post']);
+            } else {             
+                throw new Exception('Erreur dans la modification du commentaire.');
+            }
+
+        } elseif ($_GET['action'] == 'deleteComment') {
+            $backendControler->deleteComment($_GET['id']);
 
     // BACK ADMIN ACCOUNT
         } elseif ($_GET['action'] == 'adminIndex') {

@@ -160,6 +160,9 @@ a:hover {
             border: none;
             margin-top: 15px;
         }
+    .adminSignalised {
+        color: red;
+    }
 
 /* MODAL */
 
