@@ -3,7 +3,7 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
            
 <!-- MODIFICATION DU COMMENTAIRE -->
 <h2>Modifier le billet</h2>
-<a href="index.php?action=adminViewPosts" class="buttonStyle">Annuler</a>
+<a href="index.php?action=displayAllPostsAdmin" class="buttonStyle">Annuler</a>
 
 <div class="news">
     <form action="index.php?action=editPost&amp;id=<?= $_GET['id'] ?>" method="post">

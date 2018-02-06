@@ -10,14 +10,24 @@ class AdminManager extends Manager
         $req = $db->prepare('SELECT pseudo, password, email FROM admin WHERE email = ?');
         $req->execute(array($email));
         $admin = $req->fetch();
-        if (password_verify($password, $admin['password'])) {
-            $adminInfo = [
+        if (password_verify($password, $admin['password'])) { // vérifie si les mots de passe sont identiques (celui rentré et celui de la bdd)
+            $adminInfo = array(
                 'pseudo' => $admin['pseudo'],
                 'email' => $admin['email'],
-            ];
-            return $adminInfo;
+            );
+            $result = array(
+                'status' => 'ok',
+                'data' => $adminInfo,
+            );
+            return $result;
+
+        } else {
+            $result = array(
+                'status' => 'error',
+                'data' => 'Votre identifiant ou votre mot de passe est incorrect !',
+            );
+            return $result;
         }
-        return false;
     }
 
     public function pseudoUpdate($pseudo, $password) { // pour gérer les modifs d'id du compte admin

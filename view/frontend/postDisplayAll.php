@@ -13,7 +13,7 @@ while ($data = $posts->fetch()) {
 		<h3><?php echo htmlspecialchars($data['title']); ?></h3>
 		<i class="smallInfosText">publié le <?php echo htmlspecialchars($data['creation_date_fr']); ?></i>
 		<p><?php echo $postManager->getExcerpt($data['content']); ?></p>
-		<a class="buttonStyle" href="index.php?action=post&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
+		<a class="buttonStyle" href="index.php?action=displayOnePostUser&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
 	</div>
 <?php
 }
@@ -22,4 +22,4 @@ $posts->closeCursor(); // Termine le traitement de la requête
 
 <?php echo $pagination;		
 $content = ob_get_clean(); // restitue le code html de la variable "content" (voir ligne 3)
-require('./view/template.php'); ?>
+require('./view/frontend/template.php'); ?>

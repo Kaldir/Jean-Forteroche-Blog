@@ -3,7 +3,7 @@ ob_start(); ?>
            
 <!-- MODIFICATION DU COMMENTAIRE -->
 <h2>Modifier le commentaire</h2>
-<a href="index.php?action=adminViewComments" class="buttonStyle">Annuler</a>
+<a href="index.php?action=displaySignalisedCommentsAdmin" class="buttonStyle">Annuler</a>
 
 <div class="news">
     <form action="index.php?action=editComment" method="post">

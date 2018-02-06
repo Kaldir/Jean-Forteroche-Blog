@@ -4,6 +4,10 @@ a:hover {
 .introContainer {
     height: 720px;
 }
+form label {
+    color: #772e01;
+    font-weight: bold;
+}
 
 /* HEADER */
 
@@ -33,6 +37,7 @@ a:hover {
         padding: 10px 20px;
         text-align: justify;
         margin: 10px;
+        color: #ad4400;
     }
     #admin {
         display: flex;
@@ -55,8 +60,11 @@ a:hover {
         padding: 5px;
     }    
         #adminPart a {
-            color: white;
+            color: #ad4400;
         }
+            #adminPart a:hover {
+                color: white;
+            }
         #adminLinks {
             display: flex;
             justify-content: space-evenly;
@@ -75,25 +83,28 @@ a:hover {
     justify-content: center;
 }
     .divNumber {
-        border: solid #d7c6ac 2px;
+        border: solid #ad4400 2px;
         border-radius: 50%;
         width: 20px;
         height: 20px;
-        background-color: white;
+        background-color: rgba(181, 97, 0, 0.1);
         margin: 0 3px;
     }
         .nb {
             margin-top: -5px;
         }
+            .nb a {
+                color: #772e01;
+            }
 
 
 #content {
     padding: 20px 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(236, 217, 128, 0.7);
     overflow: overlay;
 }
     #content h2, .buttonStyle {
-        background-color: #d7c6ac;
+        background-color: #ad4400;
         border-radius: 3px;
         width: fit-content;
         padding: 5px;
@@ -104,16 +115,17 @@ a:hover {
         border: none;
     }
         .buttonStyle:hover {
-            background-color: #a5957d;
+            background-color: #efa045;
             text-decoration: none;
             color: white;
         }
     #content h3 {
         font-family: Copperplate Gothic;
         font-size: 1.8em;
+        color: #772e01;
     }
     .smallInfosText {
-        color: grey;
+        color: rgba(181, 97, 0, 0.8);
         font-size: 0.7em;
     }
 
@@ -121,7 +133,7 @@ a:hover {
 
 .news, #commentDisplay {
     margin: 20px 30px 30px;
-    background-color: white;
+    background-color: rgba(181, 97, 0, 0.2);
     border-radius: 5px;
     padding: 10px;
     text-align: center;
@@ -133,18 +145,20 @@ a:hover {
     .news p {
         text-align: justify;
         padding: 10px;
+        color: #ad4400
     }
 
 /* COMMENTS */
 
 .commentStyle {
-    background-color: #d7c6ac;
+    background-color: #f2e4a6;
     border-radius: 5px;
     padding: 5px 0;
     margin: 15px 5px;
+    color: #772e01;
 }
     .fa-exclamation-circle {
-        color: grey;
+        color: rgba(181, 97, 0, 1);
     }
     .commentStyle p {
         margin-bottom: 0;
@@ -154,6 +168,7 @@ a:hover {
     }
         #author, #comment, #title {
             width: 100%;
+            margin-bottom: 5px;
         }
         #submitComment {
             border-radius: 5px;
@@ -161,9 +176,36 @@ a:hover {
             margin-top: 15px;
         }
     .adminSignalised {
-        color: red;
+        color: darkorange;
+        font-size: 0.8em;
+        font-weight: bold;
     }
-
+    .fa-pencil, .fa-trash {
+        border-radius: 5px;
+        width: 23px;
+        height: 23px;
+        background-color: white;
+        margin: 0 3px;
+        padding-top: 2.2px;
+        border: solid #b29870 1px;
+        color: #772e01;
+    }
+    .linkComment {
+        background-color: #ad4400;
+        border-radius: 3px;
+        width: fit-content;
+        margin: 4px;
+        font-weight: bold;
+    }
+        .linkComment p {
+            color: white;
+        }
+    .titleComment {
+        color: #efa045
+    }
+        .titleComment:hover {
+            color: orange;
+        }
 /* MODAL */
 
 #modalSignal {
@@ -187,3 +229,13 @@ a:hover {
         margin: 0;
         align-self: flex-end;
     }
+.pseudoStyle {
+    margin: 0;
+    align-self: center;
+    background-color: #efa045;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 1.2em;
+    color: white;
+    font-weight: bold;
+}

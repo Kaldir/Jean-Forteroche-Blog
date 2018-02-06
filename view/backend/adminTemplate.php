@@ -23,9 +23,9 @@
 
 		                <p>Administration</p>
 
-		                <a href="index.php?action=adminViewPosts" class="buttonStyle" method="post">Billets</a>
-		                <a href="index.php?action=adminViewComments" class="buttonStyle" method="post">Commentaires signalés</a>
-		                <a href="index.php?action=adminAccountModifications" class="buttonStyle">Paramètres compte</a>
+		                <a href="index.php?action=displayAllPostsAdmin" class="buttonStyle" method="post">Billets</a>
+		                <a href="index.php?action=displaySignalisedCommentsAdmin" class="buttonStyle" method="post">Commentaires signalés</a>
+		                <a href="index.php?action=adminAccountModificationsForm" class="buttonStyle">Paramètres compte</a>
 		                <a href="index.php?action=logout" class="buttonStyle">Déconnexion</a>
                     </div>
 

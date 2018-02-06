@@ -8,15 +8,9 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
 if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas vide
 ?>
     <div class="news">
-        <h3><?php echo htmlspecialchars($post['title']); ?></h3>
-        
-        <i class="smallInfosText">publié le <?php echo htmlspecialchars($post['creation_date_fr']); ?> </i>
-        
+        <h3><?php echo htmlspecialchars($post['title']); ?></h3>        
+        <i class="smallInfosText">publié le <?php echo htmlspecialchars($post['creation_date_fr']); ?> </i>        
         <?php echo nl2br($post['content']); ?>
-<!--        <a href="" class="buttonStyle"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-        <a href="" class="buttonStyle"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-PAGINATION A GERER POUR PRECEDENT/SUIVANT
--->
     </div>
 <?php
 } else {
@@ -68,7 +62,7 @@ if ($signalised) {
 ?>
 
 <?php $content = ob_get_clean();
-require('./view/template.php');
+require('./view/frontend/template.php');
 
 // on déclare ce script après l'exécution de Jquery qui se trouve dans template.php
 if ($signalised) {

@@ -1,7 +1,7 @@
 <?php
 $actionAdmin = '';
 if (!empty($_SESSION['admin'])) {
-	$actionAdmin = 'action=adminViewPosts&';
+	$actionAdmin = 'action=displayAllPostsAdmin&';
 }
 $pagination = '<div class="pagination">';
 $nbPost = ceil($nbPost/5); // nombre de billet divisé par 5

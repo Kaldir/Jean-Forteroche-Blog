@@ -1,11 +1,9 @@
 <?php // CONTROLER
 namespace Kldr\Blog\Controler;
 
-// Loading classes
-require_once('./model/PostManager.php');
-require_once('./model/CommentManager.php');
+require_once('./controler/main.php');
 
-class FrontendControler
+class FrontendControler extends MainControler
 {
 // POSTS
 	public function listPosts($zone = 0) {
@@ -13,17 +11,17 @@ class FrontendControler
 		$posts = $postManager->getPosts($zone); // Appel d'une méthode et de son argument
 		$nbPost = $postManager->nbPost();
 
-		require('./view/frontend/listPostsView.php');
+		require('./view/frontend/postDisplayAll.php');
 	}
 
-	public function post($postId, $signalised = false) {
+	public function displayOnePostUser($postId, $signalised = false) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 
 		$post = $postManager->getPost($postId);
 		$comments = $commentManager->getComments($postId);
 
-		require('./view/frontend/postView.php');
+		require('./view/frontend/postDisplayOne.php');
 	}
 
 // COMMENTS
@@ -35,27 +33,27 @@ class FrontendControler
 		if ($success == false) {
 	        throw new Exception('Impossible d\'ajouter le commentaire !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
 	    } else {
-			header('Location: index.php?action=post&id=' . $postId);
+			header('Location: index.php?action=displayOnePostUser&id=' . $postId);
 	    }
 	}
 
 	public function signal($commentId, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$commentManager->signalisedComment($commentId);
-		header('Location: index.php?action=post&signaled=true&id=' . $postId);
+		header('Location: index.php?action=displayOnePostUser&signaled=true&id=' . $postId);
 	}
 
 // ADMIN ACCOUNT
 	public function checkLogin($password, $email) {
 		$adminManager = new \Kldr\Blog\Model\AdminManager();
-		$adminInfo = $adminManager->checkLogin($_POST['password'], $_POST['email']);
-        if (is_array($adminInfo)) {
+		$result = $adminManager->checkLogin($_POST['password'], $_POST['email']);
+        if ($result['status'] == 'ok') {
             $_SESSION['admin'] = true;
-            $_SESSION['pseudo'] = $adminInfo['pseudo'];
-            $_SESSION['email'] = $adminInfo['email'];
+            $_SESSION['pseudo'] = $result['data']['pseudo']; // va chercher l'info pseudo contenu dans le tableau data contenu dans la variable result lorsque status = ok
+            $_SESSION['email'] = $result['data']['email'];
         	header('Location: index.php?action=adminIndex');
         } else {
-    		header('Location: index.php?action=adminLogin');
+    		$this->error($result['data']); // va chercher le message d'erreur contenu dans data lorsque status = error (voir AdminManager.php)
         }
 	}	
 }

@@ -30,9 +30,9 @@
 							<a href=""><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
 						</div>
 						
-						<div class="buttonStyle">
-							<a href="index.php?action=adminLogin">Connexion administrateur</a>
-						</div>
+						<a href="index.php?action=loginForm">
+							<div class="buttonStyle">Connexion administrateur</div>
+						</a>
 					</div>
 
 					<div class="footer">

@@ -12,13 +12,15 @@ while ($comment = $comments->fetch()) {
             <strong><?php echo htmlspecialchars($comment['author']); ?></strong>
             <i class="smallInfosText">- <?php echo htmlspecialchars($comment['comment_date_fr']); ?></i>
 
-            <a href="index.php?action=displayCommentsForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <span class="editDeleteIcons"><a href="index.php?action=editCommentForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
 
             <a href="index.php?action=deleteComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
             <p><?php echo $comment['comment']; ?></p>
         </div>
-        <p>En provenance du billet "<a href="index.php?action=adminPost&amp;id=<?php echo htmlspecialchars($comment['id_post']); ?>"><?php echo htmlspecialchars($comment['title']); ?></a>"</p>
+        <div class="linkComment">
+            <p>En provenance du billet "<a href="index.php?action=displayOnePostAdmin&amp;id=<?php echo htmlspecialchars($comment['id_post']); ?>" class="titleComment"><?php echo htmlspecialchars($comment['title']); ?></a>"</p>
+        </div>
     </div>
 <?php
 }

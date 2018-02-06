@@ -29,12 +29,12 @@ while ($data = $posts->fetch()) {
 		<h3><?php echo htmlspecialchars($data['title']); ?></h3>
 		<i class="smallInfosText">publié le <?php echo htmlspecialchars($data['creation_date_fr']); ?></i>
 
-		<a href="index.php?action=displayPostForm&amp;id=<?php echo htmlspecialchars($data['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+		<a href="index.php?action=editPostForm&amp;id=<?php echo htmlspecialchars($data['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 		<a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($data['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce billet ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
         <p><?php echo $postManager->getExcerpt($data['content']); ?></p>
-        <a class="buttonStyle" href="index.php?action=adminPost&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
+        <a class="buttonStyle" href="index.php?action=displayOnePostAdmin&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
 	</div>
 <?php
 }

@@ -1,12 +1,9 @@
 <?php // CONTROLER - ADMIN
 namespace Kldr\Blog\Controler;
 
-// Loading classes
-require_once('./model/PostManager.php');
-require_once('./model/CommentManager.php');
-require_once('./model/AdminManager.php');
+require_once('./controler/main.php');
 
-class BackendControler
+class BackendControler extends MainControler
 {
 
 // POSTS
@@ -15,30 +12,30 @@ class BackendControler
 	}
 
 	public function adminPosts() {
-		require('./view/backend/adminPosts.php');
+		require('./view/backend/adminPostDisplayAll.php');
 	}
 
-	public function adminViewPosts($zone) {
+	public function displayAllPostsAdmin($zone = 0) {
 		$postManager = new \Kldr\Blog\Model\PostManager(); // Création d'un objet
 		$posts = $postManager->getPosts($zone); // Appel d'une fonction de cet objet
 		$nbPost = $postManager->nbPost();
-		require('./view/backend/adminPosts.php');
+		require('./view/backend/adminPostDisplayAll.php');
 	}
 
-	public function adminPost($postId) {
+	public function displayOnePostAdmin($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 
 		$post = $postManager->getPost($postId);
 		$comments = $commentManager->getComments($postId);
 
-		require('./view/backend/adminPostView.php');
+		require('./view/backend/adminPostDisplayOne.php');
 		}
 
-	public function displayPostForm($postId) {
+	public function editPostForm($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 	    $post = $postManager->getPost($postId);
-		require('./view/backend/postModify.php');
+		require('./view/backend/adminPostModifyForm.php');
 	    if ($post == false) {
 	        throw new Exception('Impossible d\'éditer le billet');
 	    }
@@ -50,7 +47,7 @@ class BackendControler
 			if ($success == false) {
 		        throw new Exception('Impossible d\'ajouter le billet !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
 		    } else {
-				header('Location: index.php?action=adminViewPosts');
+				header('Location: index.php?action=displayAllPostsAdmin');
 		    }
 	}
 
@@ -60,14 +57,14 @@ class BackendControler
 			if ($success == false) {
 		        throw new Exception('Impossible d\'éditer le billet !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
 		    } else {
-				header('Location: index.php?action=adminViewPosts');
+				header('Location: index.php?action=displayAllPostsAdmin');
 		    }
 	}
 
 	public function deletePost($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 	    $deletePost = $postManager->deletePost($postId);
-	 	header('Location: index.php?action=adminViewPosts');
+	 	header('Location: index.php?action=displayAllPostsAdmin');
 	}
 
 // COMMENTS
@@ -84,29 +81,29 @@ class BackendControler
 	        throw new Exception('Impossible d\'éditer le commentaire');
 	    }
 	    else {
-		    header('Location: index.php?action=adminViewComments');
+		    header('Location: index.php?action=displaySignalisedCommentsAdmin');
 	    }
 	}
 
 	public function deleteComment($commentId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 	    $deleteComment = $commentManager->deleteComment($commentId);
-	 	header('Location: index.php?action=adminViewComments');
+	 	header('Location: index.php?action=displaySignalisedCommentsAdmin');
 	}
 
-	public function displayCommentsForm($commentId) {
+	public function editCommentForm($commentId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$comment = $commentManager->selectComment($commentId);
 		
-		require('./view/backend/commentModify.php');
+		require('./view/backend/adminCommentsForm.php');
 	}
 
 // ADMIN ACCOUNT
 	public function adminForm($message = '') {
-		require('./view/frontend/admin.php');
+		require('./view/frontend/adminForm.php');
 	}
 
-	public function adminAccountModifications() {
+	public function adminAccountModificationsForm() {
 		require('./view/backend/adminAccount.php');
 	}
 
@@ -116,7 +113,7 @@ class BackendControler
 		if ($pseudoUp == true) {
 			$_SESSION['pseudo'] = $pseudo;
 		}
-		header('Location: index.php?action=adminAccountModifications');
+		header('Location: index.php?action=adminAccountModificationsForm');
 	}
 
 	public function passUpdate($password, $newPassword) {
@@ -125,6 +122,6 @@ class BackendControler
 		if ($passUp == false) {
 	    	throw new Exception('Impossible de modifier le mot de passe !');
 		}
-		header('Location: index.php?action=adminAccountModifications&success=true');
+		header('Location: index.php?action=adminAccountModificationsForm&success=true');
 	}
 }

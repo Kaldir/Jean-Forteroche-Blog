@@ -12,7 +12,7 @@ if (!empty($_GET['success'])) { // si la variable n'est pas vide (c'est à dire 
 <div class="news">
     <form action="index.php?action=pseudoUpdate" method="post" id="connexionAdmin">
         <label for="pseudo">Pseudo actuel</label>
-        <div><?php echo $_SESSION['pseudo']; ?></div><br />
+        <div class="pseudoStyle"><?php echo $_SESSION['pseudo']; ?></div><br />
         <label for="newPseudo">Nouveau pseudo</label>
         <input type="text" id="newPseudo" name="newPseudo" required /><br />
         <label for="password">Mot de passe actuel</label>
