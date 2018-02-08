@@ -6,4 +6,9 @@ ob_start(); ?>
 </div>
 
 <?php $content = ob_get_clean();
-require('./view/backend/adminTemplate.php'); ?>
+if (empty($_SESSION['admin']))
+	require('./view/frontend/template.php');
+} else {
+	require('./view/backend/adminTemplate.php');
+}
+?>

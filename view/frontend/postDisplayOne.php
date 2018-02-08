@@ -4,19 +4,11 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
 <a href="index.php" class="buttonStyle">Retour</a>
 
 <!-- AFFICHAGE DU BILLET -->
-<?php
-if(!empty($post)) { // n'insère les entrées que si la variable data n'est pas vide
-?>
     <div class="news">
         <h3><?php echo htmlspecialchars($post['title']); ?></h3>        
-        <i class="smallInfosText">publié le <?php echo htmlspecialchars($post['creation_date_fr']); ?> </i>        
+        <i class="smallInfosText">publié le <?php echo htmlspecialchars($post['creation_date_fr']); ?> </i>
         <?php echo nl2br($post['content']); ?>
     </div>
-<?php
-} else {
-    header('Location: index.php'); // si un id de billet inexistant est rentré manuellement dans l'url, l'user est redirigé sur la page d'accueil)
-}
-?>
 
 <!-- AFFICHAGE DES COMMENTAIRES -->
 <h2>Commentaires</h2>
@@ -67,7 +59,7 @@ require('./view/frontend/template.php');
 // on déclare ce script après l'exécution de Jquery qui se trouve dans template.php
 if ($signalised) {
 ?>
-        <script> $('#modalSignal').modal('show'); </script> <!-- display la modal lorsqu'un commentaire est signalé (passe en true dans la bdd) -->
+    <script> $('#modalSignal').modal('show'); </script> <!-- display la modal lorsqu'un commentaire est signalé (passe en true dans la bdd) -->
 <?php
 }
 ?>

@@ -10,7 +10,6 @@ class PostManager extends Manager
         $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT ?, 5');
         $req->bindValue(1, $zone, \PDO::PARAM_INT); // permet d'insérer la variable $zone dans la requête sql (en tant que nombre et pas string)
         $req->execute();
-
         return $req;
     }
 
@@ -19,24 +18,23 @@ class PostManager extends Manager
         $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS creation_date_fr FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $post = $req->fetch();
-        
         return $post;
     }
 
     public function postPost($title, $content) { // ajout d'un post
         $db = $this->dbConnect();
-        $post = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES (?, ?, NOW())');
-        $affectedLines = $post->execute(array($title, $content));
-   
+        $req = $db->prepare('INSERT INTO posts(title, content, creation_date) VALUES (?, ?, NOW())');
+        $req->execute(array($title, $content));
+        $affectedLines = $req->rowCount(); // permet de compter le nombre de ligne affectées par la dernière requête
         return $affectedLines;
     }
 
     public function editPost($title, $content, $postId) { // fonction qui permet de modifier un post
         $db = $this->dbConnect();
-        $post = $db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
-        $modify = $post->execute(array($title, $content, $postId));
-    
-        return $modify;
+        $req = $db->prepare('UPDATE posts SET title = ?, content = ? WHERE id = ?');
+        $req->execute(array($title, $content, $postId));
+        $edit = $req->rowCount(); // permet de compter le nombre de ligne affectées par la dernière requête
+        return $edit;
     }
 
     public function deletePost($postId) { // permet de supprimer un billet et ses commentaires associés de la bdd
@@ -44,17 +42,16 @@ class PostManager extends Manager
         $comment = $db->prepare('DELETE FROM comments WHERE id_post = ?');
         $comment->execute(array($postId));
         $post = $db->prepare('DELETE FROM posts WHERE id = ?');
-        $delete = $post->execute(array($postId));
-
+        $post->execute(array($postId));
+        $delete = $post->rowCount(); // permet de compter le nombre de ligne affectées par la dernière requête
         return $delete;
     }
 
     public function nbPost() { // Compte le nombre total de billets contenu dans la bdd
         $db = $this->dbConnect();
         $req = $db->query('SELECT COUNT(*) FROM posts');
-        $req = $req->fetchColumn();
-
-        return $req;
+        $nbPost = $req->fetchColumn();
+        return $nbPost;
     }
 
     public function getExcerpt($string, $start = 0, $maxLength = 300) { // Affiche un extrait d'un billet et donne des valeurs par défaut qui sont modifiable lorsque on fait appel à la méthode (à cause de tinyMCE, il faut penser à prendre en compte les balises html, non visible sur le site mais considérées par le maxLength)

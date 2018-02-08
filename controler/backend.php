@@ -19,87 +19,108 @@ class BackendControler extends MainControler
 		$postManager = new \Kldr\Blog\Model\PostManager(); // Création d'un objet
 		$posts = $postManager->getPosts($zone); // Appel d'une fonction de cet objet
 		$nbPost = $postManager->nbPost();
-		require('./view/backend/adminPostDisplayAll.php');
+		if ($nbPost > 0) {
+			require('./view/backend/adminPostDisplayAll.php');
+		} else {
+			$this->error('Il n\'y a aucun billet à afficher !');
+		}
 	}
 
 	public function displayOnePostAdmin($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
-
 		$post = $postManager->getPost($postId);
 		$comments = $commentManager->getComments($postId);
-
-		require('./view/backend/adminPostDisplayOne.php');
+		if (!empty($post)) {
+			require('./view/backend/adminPostDisplayOne.php');
+		} else {
+			$this->error('Il n\'y a aucun billet à afficher !');
 		}
+	}
 
 	public function editPostForm($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 	    $post = $postManager->getPost($postId);
-		require('./view/backend/adminPostModifyForm.php');
-	    if ($post == false) {
-	        throw new Exception('Impossible d\'éditer le billet');
+	    if (!empty($post)) {
+			require('./view/backend/adminPostModifyForm.php');
+		} else {
+			$this->error('Impossible d\'éditer le billet !');
 	    }
 	}
 
 	public function addPost($title, $content) {
-			$postManager = new \Kldr\Blog\Model\PostManager();
-			$success = $postManager->postPost($title, $content);
-			if ($success == false) {
-		        throw new Exception('Impossible d\'ajouter le billet !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
-		    } else {
-				header('Location: index.php?action=displayAllPostsAdmin');
-		    }
+		$postManager = new \Kldr\Blog\Model\PostManager();
+		$success = $postManager->postPost($title, $content);
+		if ($success > 0) {
+			header('Location: index.php?action=displayAllPostsAdmin'); // renvoie l'admin sur la page admin des posts
+	    } else {
+			$this->error('Impossible d\'ajouter le billet !');
+	    }
 	}
 
 	public function editPost($title, $content, $postId) {
-			$postManager = new \Kldr\Blog\Model\PostManager();
-			$success = $postManager->editPost($title, $content, $postId);
-			if ($success == false) {
-		        throw new Exception('Impossible d\'éditer le billet !'); // message d'erreur, erreur qui remonte jusqu'au bloc try du routeur (function $dbconnect -> model.php)
-		    } else {
-				header('Location: index.php?action=displayAllPostsAdmin');
-		    }
+		$postManager = new \Kldr\Blog\Model\PostManager();
+		$success = $postManager->editPost($title, $content, $postId);
+		if ($success > 0) {
+			header('Location: index.php?action=displayAllPostsAdmin');
+		} else {
+			$this->error('Impossible d\'éditer le billet !');
+		}		    	
 	}
 
 	public function deletePost($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 	    $deletePost = $postManager->deletePost($postId);
-	 	header('Location: index.php?action=displayAllPostsAdmin');
+	 	if ($deletePost > 0) {
+	 		header('Location: index.php?action=displayAllPostsAdmin'); // renvoie l'admin sur la page admin des posts
+		} else {
+			$this->error('Aucun billet n\'a été effacé...');
+		}
 	}
 
 // COMMENTS
 	public function adminComments() {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$comments = $commentManager->getCommentsSignalised();
-		require('./view/backend/adminComments.php');
+		if (!empty($comments)) {
+			require('./view/backend/adminComments.php');
+		} else {
+			$this->error('Il n\'y a aucun commentaire à modérer !');
+		}
 	}
 
 	public function editComment($commentId, $comment) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 	    $editComment = $commentManager->editComment($commentId, $comment);
-	    if ($editComment == false) {
-	        throw new Exception('Impossible d\'éditer le commentaire');
-	    }
-	    else {
-		    header('Location: index.php?action=displaySignalisedCommentsAdmin');
-	    }
+	    if ($editComment > 0) {
+	        header('Location: index.php?action=displaySignalisedCommentsAdmin');
+		} else {
+			$this->error('Impossible d\'éditer le commentaire...');
+		}
 	}
 
 	public function deleteComment($commentId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 	    $deleteComment = $commentManager->deleteComment($commentId);
-	 	header('Location: index.php?action=displaySignalisedCommentsAdmin');
+	    if ($deleteComment > 0) {
+	 	header('Location: index.php?action=displaySignalisedCommentsAdmin'); // renvoie l'admin sur la page des commentaires signalés après la suppression de l'un d'eux
+		} else {
+			$this->error('Aucun commentaire n\'a été effacé...');
+		}
 	}
 
 	public function editCommentForm($commentId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$comment = $commentManager->selectComment($commentId);
-		
-		require('./view/backend/adminCommentsForm.php');
+		if (!empty($comment)) {
+			require('./view/backend/adminCommentsForm.php');
+	    } else {
+			$this->error('Ce commentaire n\'existe pas !');
+	    }
 	}
 
 // ADMIN ACCOUNT
-	public function adminForm($message = '') {
+	public function adminForm() {
 		require('./view/frontend/adminForm.php');
 	}
 
@@ -110,18 +131,21 @@ class BackendControler extends MainControler
 	public function pseudoUpdate($pseudo, $password) {
 		$adminManager = new \Kldr\Blog\Model\AdminManager();
 		$pseudoUp = $adminManager->pseudoUpdate($pseudo, $password);
-		if ($pseudoUp == true) {
+		if ($pseudoUp > 0) { // rapport au rowCount, on vérifie si une ligne a été modifiée (voir AdminManager.php méthode pseudoUpdate)
 			$_SESSION['pseudo'] = $pseudo;
-		}
-		header('Location: index.php?action=adminAccountModificationsForm');
+			header('Location: index.php?action=adminAccountModificationsForm');
+	    } else {
+			$this->error('Impossible de modifier le pseudo !');
+	    }
 	}
 
 	public function passUpdate($password, $newPassword) {
 		$adminManager = new \Kldr\Blog\Model\AdminManager();
 		$passUp = $adminManager->passUpdate($password, $newPassword);
-		if ($passUp == false) {
-	    	throw new Exception('Impossible de modifier le mot de passe !');
-		}
-		header('Location: index.php?action=adminAccountModificationsForm&success=true');
+		if ($passUp > 0 && $_POST['newPassword'] == $_POST['checkPassword']) {
+			header('Location: index.php?action=adminAccountModificationsForm&success=true');
+	    } else {
+			$this->error('Impossible de modifier le mot de passe !');
+	    }
 	}
 }

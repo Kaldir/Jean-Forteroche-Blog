@@ -15,18 +15,9 @@ class AdminManager extends Manager
                 'pseudo' => $admin['pseudo'],
                 'email' => $admin['email'],
             );
-            $result = array(
-                'status' => 'ok',
-                'data' => $adminInfo,
-            );
-            return $result;
-
+            return $adminInfo;
         } else {
-            $result = array(
-                'status' => 'error',
-                'data' => 'Votre identifiant ou votre mot de passe est incorrect !',
-            );
-            return $result;
+            return false;
         }
     }
 
@@ -35,10 +26,12 @@ class AdminManager extends Manager
         $checkLogin = $this->checkLogin($password, $_SESSION['email']);
         if (is_array($checkLogin)) {
             $req = $db->prepare('UPDATE admin SET pseudo = ? WHERE email = ?');
-            $pseudoUp = $req->execute(array($pseudo, $_SESSION['email']));
+            $req->execute(array($pseudo, $_SESSION['email']));
+            $pseudoUp = $req->rowCount(); // permet de compter le nombre de ligne affectées par la dernière requête
             return $pseudoUp;
+        } else {
+            return false;
         }
-        return false;
     }
 
         public function passUpdate($password, $newPassword) { // pour gérer les modifs de mdp du compte admin
@@ -47,9 +40,11 @@ class AdminManager extends Manager
         if (is_array($checkLogin)) {
             $newPassword = password_hash($newPassword, PASSWORD_DEFAULT); // Hachage du mot de passe
             $req = $db->prepare('UPDATE admin SET password = ? WHERE email = ?');
-            $passUp = $req->execute(array($newPassword, $_SESSION['email']));
+            $req->execute(array($newPassword, $_SESSION['email']));
+            $passUp = $req->rowCount(); // permet de compter le nombre de ligne affectées par la dernière requête
             return $passUp;
+        } else {
+            return false;
         }
-    return false;
     }
 }

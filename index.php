@@ -26,9 +26,9 @@ if (!empty($_GET['action'])) {
                 } else {
                     $frontendControler->displayOnePostUser($_GET['id']); // sinon, elle garde sa valeur par défaut (false)
                 }
-            } else {             
-                throw new Exception('Aucun identifiant de billet envoyé'); // gestion des erreurs avec une exception : stop l'exécution, envoie l'exception, va directement au bloc catch
-            }
+            } else {
+                $frontendControler->error('L\'identifiant du billet n\'existe pas...');
+            }   
 
     // FRONT COMMENTS
         } elseif ($_GET['action'] == 'addComment') {
@@ -36,30 +36,32 @@ if (!empty($_GET['action'])) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
                     $frontendControler->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
                 } else {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
+                    $frontendControler->error('Tous les champs ne sont pas remplis !');
                 }
             } else {
-                throw new Exception('Aucun identifiant de billet envoyé');
-            }
+                $frontendControler->error('L\'identifiant du billet n\'existe pas...');
+            }   
 
         } elseif ($_GET['action'] == 'signalComment') {
             if (!empty($_GET['id']) && $_GET['id'] > 0) {
                 $frontendControler->signal($_GET['id'], $_GET['postId']);
-            }
+            } else {
+                $frontendControler->error('L\'identifiant du billet n\'existe pas...');
+            }            
 
     // FRONT ADMIN ACCOUNT
         } elseif ($_GET['action'] == 'loginForm') {
             $backendControler->adminForm();
 
         } elseif ($_GET['action'] == 'login') {
-            if (!empty($_POST['password']) AND isset($_POST['email'])) {
+            if (!empty($_POST['password']) AND !empty($_POST['email'])) {
                 $frontendControler->checkLogin($_POST['password'], $_POST['email']);
             } else {
-                $backendControler->adminForm('Votre identifiant ou votre mot de passe est incorrect !');
+                $frontendControler->error('Tous les champs ne sont pas remplis !');
             }
         }
 
-    } else { // Sinon, si une session existe, les actions  back qui suivent peuvent s'exécuter :
+    } else { // Sinon, si une session existe, les actions back qui suivent peuvent s'exécuter :
 
     // BACK POSTS
         if ($_GET['action'] == 'displayAllPostsAdmin') {
@@ -77,8 +79,8 @@ if (!empty($_GET['action'])) {
         } elseif ($_GET['action'] == 'editPost') {
             if (!empty($_GET['id']) && $_GET['id'] > 0 && !empty($_POST['title']) && !empty($_POST['content'])) {
                 $backendControler->editPost($_POST['title'], $_POST['content'], $_GET['id']);
-            } else {             
-                throw new Exception('Erreur');
+            } else {
+                $backendControler->error('L\'identifiant du billet n\'existe pas et/ou tous les champs ne sont pas remplis.');
             }
 
         } elseif ($_GET['action'] == 'deletePost') {
@@ -92,14 +94,14 @@ if (!empty($_GET['action'])) {
             if (!empty($_GET['id']) && $_GET['id'] > 0) {
                 $backendControler->editCommentForm($_GET['id']);
             } else {
-                throw new Exception('Aucun identifiant envoyé');
+                $backendControler->error('L\'identifiant du billet n\'existe pas...');
             }
 
         } elseif ($_GET['action'] == 'editComment') {
-                if (!empty($_POST['id']) && $_POST['id'] > 0 && !empty($_POST['comment']) && !empty($_POST['id_post']) && $_POST['id_post'] > 0) {
+            if (!empty($_POST['id']) && $_POST['id'] > 0 && !empty($_POST['comment']) && !empty($_POST['id_post']) && $_POST['id_post'] > 0) {
                 $backendControler->editComment($_POST['id'], $_POST['comment'], $_POST['id_post']);
-            } else {             
-                throw new Exception('Erreur dans la modification du commentaire.');
+            } else {
+                $backendControler->error('Tous les champs ne sont pas remplis !');
             }
 
         } elseif ($_GET['action'] == 'deleteComment') {
@@ -113,14 +115,18 @@ if (!empty($_GET['action'])) {
             $backendControler->adminAccountModificationsForm();
 
         } elseif ($_GET['action'] == 'pseudoUpdate') {
-                if  (!empty($_POST['newPseudo']) && !empty($_POST['password'])) {
-                    $backendControler->pseudoUpdate($_POST['newPseudo'], $_POST['password']);
-                } 
+            if  (!empty($_POST['newPseudo']) && !empty($_POST['password'])) {
+                $backendControler->pseudoUpdate($_POST['newPseudo'], $_POST['password']);
+            } else {
+                $backendControler->error('Tous les champs ne sont pas remplis !');
+            }
 
         } elseif ($_GET['action'] == 'passUpdate') {
-                if  (!empty($_POST['password']) && !empty($_POST['newPassword']) && !empty($_POST['checkPassword']) && $_POST['newPassword'] == $_POST['checkPassword']) {
-                    $backendControler->passUpdate($_POST['password'], $_POST['newPassword']);
-                }
+            if  (!empty($_POST['password']) && !empty($_POST['newPassword']) && !empty($_POST['checkPassword'])) {
+                $backendControler->passUpdate($_POST['password'], $_POST['newPassword']);
+            } else {
+                $backendControler->error('Tous les champs ne sont pas remplis !');
+            }
 
         } elseif ($_GET['action'] == 'logout') {
             session_destroy();
