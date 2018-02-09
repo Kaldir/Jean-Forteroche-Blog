@@ -1,8 +1,10 @@
-<?php $title = 'Gestion des billets';
+<?php $title = 'Billets';
 require('./view/pagination.php');
-ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
-    
-<!-- MODIFICATION DU POST -->
+ob_start(); // Permet de mémoriser le code html qui suit en le mettant dans la variable "content"
+
+if (!empty($_SESSION['admin'])) {
+?>
+<!-- MODIFICATION POST IF ADMIN-->
 <h2>Ajout d'un billet</h2>
 
 <div class="news">
@@ -16,11 +18,14 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
         </div>
     </form>
 </div>
+<?php
+}
+?>
 
 <?php echo $pagination; ?>
 
 <h2>Billets en ligne</h2>
-
+<!-- POSTS : affiche chaque entrée une à une (avec sécurité pour les failles XSS) -->
 <?php
 while ($data = $posts->fetch()) {
 ?>
@@ -29,18 +34,21 @@ while ($data = $posts->fetch()) {
 		<h3><?php echo htmlspecialchars($data['title']); ?></h3>
 		<i class="smallInfosText">publié le <?php echo htmlspecialchars($data['creation_date_fr']); ?></i>
 
+<!-- EDIT & DELETE POST IF ADMIN-->
+<?php
+if (!empty($_SESSION['admin'])) {
+?>
 		<a href="index.php?action=editPostForm&amp;id=<?php echo htmlspecialchars($data['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 		<a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($data['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce billet ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
-
-        <p><?php echo $postManager->getExcerpt($data['content']); ?></p>
-        <a class="buttonStyle" href="index.php?action=displayOnePostAdmin&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
+<?php
+}
+?>
+        <p><?php echo $this->getExcerpt($data['content']); ?></p> <!-- on utilise ici un $this car on est toujours dans la méthode "displayAllPost" du frontendControler -->
+        <a class="buttonStyle" href="index.php?action=displayOnePost&amp;id=<?php echo htmlspecialchars($data['id']); ?>">Lire la suite...</a>
 	</div>
 <?php
 }
-$posts->closeCursor(); // Terminer le traitement de la requête
-?>
-
-<?php echo $pagination;
-$content = ob_get_clean();
-require('./view/backend/adminTemplate.php'); ?>
+$posts->closeCursor(); // Termine le traitement de la requête
+echo $pagination;
+$content = ob_get_clean(); ?>

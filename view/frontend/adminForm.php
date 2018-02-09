@@ -14,5 +14,4 @@ ob_start(); ?>
     </form>
 </div>
 
-<?php $content = ob_get_clean();
-require('./view/frontend/template.php'); ?>
+<?php $content = ob_get_clean(); ?>

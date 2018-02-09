@@ -35,5 +35,4 @@ if (!empty($_GET['success'])) { // si la variable n'est pas vide (c'est à dire 
     </form>
 </div>
 
-<?php $content = ob_get_clean();
-require('./view/backend/adminTemplate.php'); ?>
+<?php $content = ob_get_clean(); ?>

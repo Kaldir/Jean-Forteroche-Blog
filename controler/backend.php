@@ -8,22 +8,7 @@ class BackendControler extends MainControler
 
 // POSTS
 	public function adminIndex() {
-		require('./view/backend/adminIndex.php');
-	}
-
-	public function adminPosts() {
-		require('./view/backend/adminPostDisplayAll.php');
-	}
-
-	public function displayAllPostsAdmin($zone = 0) {
-		$postManager = new \Kldr\Blog\Model\PostManager(); // Création d'un objet
-		$posts = $postManager->getPosts($zone); // Appel d'une fonction de cet objet
-		$nbPost = $postManager->nbPost();
-		if ($nbPost > 0) {
-			require('./view/backend/adminPostDisplayAll.php');
-		} else {
-			$this->error('Il n\'y a aucun billet à afficher !');
-		}
+		$this->displayView('backend/adminIndex'); // on utilise $this pour appeler une méthode de sa propre classe
 	}
 
 	public function displayOnePostAdmin($postId) {
@@ -32,7 +17,11 @@ class BackendControler extends MainControler
 		$post = $postManager->getPost($postId);
 		$comments = $commentManager->getComments($postId);
 		if (!empty($post)) {
-			require('./view/backend/adminPostDisplayOne.php');
+			$variables = array(
+				'post' => $post,
+				'comments' => $comments,				
+			);
+			$this->displayView('postDisplayOne', $variables);
 		} else {
 			$this->error('Il n\'y a aucun billet à afficher !');
 		}
@@ -42,7 +31,10 @@ class BackendControler extends MainControler
 		$postManager = new \Kldr\Blog\Model\PostManager();
 	    $post = $postManager->getPost($postId);
 	    if (!empty($post)) {
-			require('./view/backend/adminPostModifyForm.php');
+			$variables = array(
+				'post' => $post,
+			);
+			$this->displayView('backend/adminPostModifyForm', $variables);
 		} else {
 			$this->error('Impossible d\'éditer le billet !');
 	    }
@@ -83,7 +75,10 @@ class BackendControler extends MainControler
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$comments = $commentManager->getCommentsSignalised();
 		if (!empty($comments)) {
-			require('./view/backend/adminComments.php');
+			$variables = array(
+				'comments' => $comments,
+			);
+			$this->displayView('backend/adminComments', $variables);			
 		} else {
 			$this->error('Il n\'y a aucun commentaire à modérer !');
 		}
@@ -113,19 +108,18 @@ class BackendControler extends MainControler
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$comment = $commentManager->selectComment($commentId);
 		if (!empty($comment)) {
-			require('./view/backend/adminCommentsForm.php');
+			$variables = array(
+				'comment' => $comment,
+			);
+			$this->displayView('backend/adminCommentsForm', $variables);
 	    } else {
 			$this->error('Ce commentaire n\'existe pas !');
 	    }
 	}
 
 // ADMIN ACCOUNT
-	public function adminForm() {
-		require('./view/frontend/adminForm.php');
-	}
-
 	public function adminAccountModificationsForm() {
-		require('./view/backend/adminAccount.php');
+		$this->displayView('backend/adminAccount');
 	}
 
 	public function pseudoUpdate($pseudo, $password) {
@@ -148,4 +142,10 @@ class BackendControler extends MainControler
 			$this->error('Impossible de modifier le mot de passe !');
 	    }
 	}
+
+	public function logout() {
+	    session_destroy();
+		header('Location: index.php');
+	}
+
 }

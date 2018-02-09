@@ -53,12 +53,4 @@ class PostManager extends Manager
         $nbPost = $req->fetchColumn();
         return $nbPost;
     }
-
-    public function getExcerpt($string, $start = 0, $maxLength = 300) { // Affiche un extrait d'un billet et donne des valeurs par défaut qui sont modifiable lorsque on fait appel à la méthode (à cause de tinyMCE, il faut penser à prendre en compte les balises html, non visible sur le site mais considérées par le maxLength)
-        if (strlen($string) > $maxLength) { // si le texte est supérieur à 100 caractères
-            $string = substr($string, $start, $maxLength); // affiche le texte, depuis le premier caractère, jusqu'à 100 caractères
-            $string  .= '...';
-        }
-        return $string;
-    }
 }

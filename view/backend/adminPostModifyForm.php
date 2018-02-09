@@ -20,5 +20,4 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
     </form>
 </div>
 
-<?php $content = ob_get_clean();
-require('./view/backend/adminTemplate.php'); ?>
+<?php $content = ob_get_clean(); ?>

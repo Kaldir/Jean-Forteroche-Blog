@@ -48,13 +48,20 @@
 
 <!-- SCRIPTS -->
 
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		<script src="https://use.fontawesome.com/bcf89603c7.js"></script>
-	    <script src="public/js/tinymce/tinymce.min.js"></script>
-  		<script>tinymce.init({ selector:'textarea' });</script>
-	    <script src="public/js/tinymce/jquery.tinymce.min.js"></script>
-		<script>$("p:empty").remove();</script> <!-- permet d'enlever les <p> vides générés par tinyMCE -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/bcf89603c7.js"></script>
+	<script src="public/js/tinymce/tinymce.min.js"></script>
+		<script>tinymce.init({ selector:'textarea' });</script>
+	<script src="public/js/tinymce/jquery.tinymce.min.js"></script>
+	<script>$("p:empty").remove();</script> <!-- permet d'enlever les <p> vides générés par tinyMCE -->
 
+	<?php
+	if (!empty($signalised)) {
+	?>
+	    <script> $('#modalSignal').modal('show'); </script> <!-- display la modal lorsqu'un commentaire est signalé (passe en true dans la bdd) -->
+	<?php
+	}
+	?>
 	</body>
 </html>

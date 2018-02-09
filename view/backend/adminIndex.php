@@ -10,5 +10,4 @@ ob_start(); ?>
     <p>Enfin, vous avez la possibilité de modifier votre pseudo et mot de passe en cliquant sur "<strong>paramètres compte</strong>".</p>
 </div>
 
-<?php $content = ob_get_clean();
-require('./view/backend/adminTemplate.php'); ?>
+<?php $content = ob_get_clean(); ?>

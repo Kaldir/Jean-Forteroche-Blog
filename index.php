@@ -16,22 +16,21 @@ $zone = 5 * ($page - 1); // Calcul du facteur multiplicateur pour determinez la 
 
 // GESTION DES ACTIONS
 if (!empty($_GET['action'])) {
-    if (empty($_SESSION['admin'])) { // vérifie si une session admin existe ou non (en l'occurence, non), et permet donc uniquement l'exécution des actions front suivantes :
-
-    // FRONT POSTS     
-        if ($_GET['action'] == 'displayOnePostUser') {
-            if (!empty($_GET['id']) && $_GET['id'] > 0) {
-                if (!empty($_GET['signaled'])) {
-                    $frontendControler->displayOnePostUser($_GET['id'], true); // si signaled existe, sa valeur est true
-                } else {
-                    $frontendControler->displayOnePostUser($_GET['id']); // sinon, elle garde sa valeur par défaut (false)
-                }
+    if ($_GET['action'] == 'displayOnePost') {
+        if (!empty($_GET['id']) && $_GET['id'] > 0) {
+            if (!empty($_GET['signaled'])) {
+                $frontendControler->displayOnePost($_GET['id'], true); // si signaled existe, sa valeur est true
             } else {
-                $frontendControler->error('L\'identifiant du billet n\'existe pas...');
-            }   
+                $frontendControler->displayOnePost($_GET['id']); // sinon, elle garde sa valeur par défaut (false)
+            }
+        } else {
+            $frontendControler->error('L\'identifiant du billet n\'existe pas...');
+        }
+    
+    } elseif (empty($_SESSION['admin'])) { // vérifie si une session admin existe ou non (en l'occurence, non), et permet donc uniquement l'exécution des actions front suivantes : 
 
     // FRONT COMMENTS
-        } elseif ($_GET['action'] == 'addComment') {
+        if ($_GET['action'] == 'addComment') {
             if (!empty($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
                     $frontendControler->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
@@ -51,7 +50,7 @@ if (!empty($_GET['action'])) {
 
     // FRONT ADMIN ACCOUNT
         } elseif ($_GET['action'] == 'loginForm') {
-            $backendControler->adminForm();
+            $frontendControler->adminForm();
 
         } elseif ($_GET['action'] == 'login') {
             if (!empty($_POST['password']) AND !empty($_POST['email'])) {
@@ -59,15 +58,16 @@ if (!empty($_GET['action'])) {
             } else {
                 $frontendControler->error('Tous les champs ne sont pas remplis !');
             }
+
+    // ERROR
+        } else {
+            $frontendControler->displayAllPost($zone); // on ne met pas de else, ainsi cette méthode est exécutée dans tous les cas
         }
 
     } else { // Sinon, si une session existe, les actions back qui suivent peuvent s'exécuter :
 
     // BACK POSTS
-        if ($_GET['action'] == 'displayAllPostsAdmin') {
-            $backendControler->displayAllPostsAdmin($zone);
-
-        } elseif ($_GET['action'] == 'editPostForm') {
+        if ($_GET['action'] == 'editPostForm') {
             $backendControler->editPostForm($_GET['id']);
 
         } elseif ($_GET['action'] == 'displayOnePostAdmin') {
@@ -129,10 +129,9 @@ if (!empty($_GET['action'])) {
             }
 
         } elseif ($_GET['action'] == 'logout') {
-            session_destroy();
-            $frontendControler->listPosts();
+            $backendControler->logout();
         }
     }
 } else {
-    $frontendControler->listPosts($zone);
+$frontendControler->displayAllPost($zone); // on ne met pas de else, ainsi cette méthode est exécutée dans tous les cas
 }

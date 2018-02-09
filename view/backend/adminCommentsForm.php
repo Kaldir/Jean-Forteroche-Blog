@@ -18,5 +18,4 @@ ob_start(); ?>
     </form>
 </div>
 
-<?php $content = ob_get_clean();
-require('./view/backend/adminTemplate.php'); ?>
+<?php $content = ob_get_clean(); ?>
