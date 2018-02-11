@@ -1,4 +1,4 @@
-<?php $title = 'Gestion du compte administrateur';
+<?php $title = 'JF - Gestion du compte administrateur';
 ob_start();
 
 if (!empty($_GET['success'])) { // si la variable n'est pas vide (c'est à dire que la méthode passUpdate du backend est true)

@@ -1,12 +1,10 @@
+<div class="pagination">
 <?php
-$actionAdmin = '';
-if (!empty($_SESSION['admin'])) {
-	$actionAdmin = 'action=displayAllPostsAdmin&';
-}
-$pagination = '<div class="pagination">';
 $nbPost = ceil($nbPost/5); // nombre de billet divisé par 5
-$pagination .= ''; // '.=' est égal à : 'ajouter à', en php
 for ($i = 1; $i < $nbPost + 1; $i++) {
-	$pagination .= "<div class='divNumber'><div class='nb'><a href='index.php?". $actionAdmin ."page=". $i ."'>". $i ." </a></div></div>";
+?>
+<div class='divNumber'><div class='nb'><a href='index.php?page=<?php echo $i; ?>'><?php echo $i; ?></a></div></div>
+<?php
 }
-$pagination .= '</div>';
+?>
+</div>

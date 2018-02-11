@@ -44,7 +44,7 @@ class BackendControler extends MainControler
 		$postManager = new \Kldr\Blog\Model\PostManager();
 		$success = $postManager->postPost($title, $content);
 		if ($success > 0) {
-			header('Location: index.php?action=displayAllPostsAdmin'); // renvoie l'admin sur la page admin des posts
+			header('Location: index.php'); 
 	    } else {
 			$this->error('Impossible d\'ajouter le billet !');
 	    }
@@ -54,7 +54,7 @@ class BackendControler extends MainControler
 		$postManager = new \Kldr\Blog\Model\PostManager();
 		$success = $postManager->editPost($title, $content, $postId);
 		if ($success > 0) {
-			header('Location: index.php?action=displayAllPostsAdmin');
+			header('Location: index.php');
 		} else {
 			$this->error('Impossible d\'éditer le billet !');
 		}		    	
@@ -64,7 +64,7 @@ class BackendControler extends MainControler
 		$postManager = new \Kldr\Blog\Model\PostManager();
 	    $deletePost = $postManager->deletePost($postId);
 	 	if ($deletePost > 0) {
-	 		header('Location: index.php?action=displayAllPostsAdmin'); // renvoie l'admin sur la page admin des posts
+	 		header('Location: index.php'); // renvoie l'admin sur la page admin des posts
 		} else {
 			$this->error('Aucun billet n\'a été effacé...');
 		}

@@ -1,9 +1,9 @@
-<?php $title = 'Modifier un billet';
+<?php $title = 'JF - Modifier un billet';
 ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
            
 <!-- MODIFICATION DU COMMENTAIRE -->
 <h2>Modifier le billet</h2>
-<a href="index.php?action=displayAllPostsAdmin" class="buttonStyle">Annuler</a>
+<input class="buttonStyle" onclick="window.history.back();" type="button" value="Annuler" /> <!-- javascript qui permet le retour à la page précédente -->
 
 <div class="news">
     <form action="index.php?action=editPost&amp;id=<?= $_GET['id'] ?>" method="post">

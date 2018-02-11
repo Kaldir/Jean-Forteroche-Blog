@@ -1,8 +1,15 @@
-a:hover {
-    text-decoration: none;
+html, body {
+    height: 100%;
 }
 .introContainer {
-    height: 720px;
+    min-height: 100%;
+    display: flex;
+}
+.introRow {
+    width: calc(100% + 30px);
+}
+a:hover {
+    text-decoration: none;
 }
 form label {
     color: #772e01;
@@ -12,17 +19,18 @@ form label {
 /* HEADER */
 
 #header {
-    background: url(../img/alaskaMenu.jpg);
+    background: url(../img/alaskaMenu3.jpg);
+    background-attachment: fixed;
     background-repeat: no-repeat;
     justify-content: center;
     flex-direction: column;
     display: flex;
     text-align: center;
+    flex: 1 0 auto
 }
     #titleBlog {
         color: white;
         font-family: Copperplate Gothic;
-        flex-grow: 1; /* pousse le footer en bas de bloc */
         margin-top: 60px;
     }
         #titleBlog a {
@@ -38,6 +46,7 @@ form label {
         text-align: justify;
         margin: 10px;
         color: #ad4400;
+        margin-top: 80px;
     }
     #admin {
         display: flex;
@@ -56,20 +65,29 @@ form label {
     #adminPart {
         background-color: rgba(255, 255, 255, 0.5);
         border-radius : 5px;
-        margin: 10px 60px;
-        padding: 5px;
+        margin: 10px;
+        padding: 15px 0;
     }    
-        #adminPart a {
-            color: #ad4400;
-        }
-            #adminPart a:hover {
-                color: white;
-            }
         #adminLinks {
             display: flex;
             justify-content: space-evenly;
             margin-bottom: 5px;
         }
+        #adminLinks a {
+            color: #ad4400;
+        }
+            #adminLinks a:hover {
+                color: #efa045;
+            }
+        #adminConnexion {
+            flex-wrap: nowrap;
+            display: flex;
+            justify-content: center;
+            width: auto;
+        }
+    #pushFooter {
+        flex-grow: 1; /* pousse le footer en bas de bloc */
+    }
     .footer {
         color: white;
         padding-top: 15px;
@@ -97,13 +115,22 @@ form label {
                 color: #772e01;
             }
 
-
 #content {
     padding: 20px 0;
     background-color: rgba(236, 217, 128, 0.7);
-    overflow: overlay;
 }
-    #content h2, .buttonStyle {
+    #content h2 {
+        background-color: white;
+        border-radius: 3px;
+        width: fit-content;
+        padding: 5px;
+        font-size: 1.2em;
+        margin: 10px 30px;
+        color: #ad4400;
+        font-weight: bold;
+        border: none;
+    }
+    .buttonStyle {
         background-color: #ad4400;
         border-radius: 3px;
         width: fit-content;
@@ -113,6 +140,7 @@ form label {
         color: white;
         font-weight: bold;
         border: none;
+        cursor: pointer;
     }
         .buttonStyle:hover {
             background-color: #efa045;
@@ -238,4 +266,27 @@ form label {
     font-size: 1.2em;
     color: white;
     font-weight: bold;
+}
+
+/* MEDIA QUERIES */
+
+@media (max-width: 1024px) {
+
+    #header {
+        min-height: 1366px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #header {
+    min-height: 1024px;
+    }
+}
+
+@media (max-width: 640px) {
+
+    #header {
+    min-height: 700px;
+    }
 }

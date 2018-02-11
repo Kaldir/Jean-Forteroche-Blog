@@ -11,8 +11,8 @@
 	</head>
 
 	<body>
-		<div class="container-fluid">
-			<div class="row introContainer">
+		<div class="container-fluid introContainer">
+			<div class="row introRow">
 				<div id="header" class="col-md-4">
 					<div id="titleBlog">
 			            <a href="index.php?action=adminIndex"><img id="leather" src="./public/img/leather2.png" />
@@ -20,7 +20,6 @@
 			        </div>
 		       
 			        <div id="admin">
-
 		                <p>Administration</p>
 
 		                <a href="index.php" class="buttonStyle" method="post">Billets</a>
@@ -29,12 +28,14 @@
 		                <a href="index.php?action=logout" class="buttonStyle">Déconnexion</a>
                     </div>
 
+                    <div id="pushFooter"></div>
+
 					<div class="footer">
 						<p>Site créé par Lucie Kojadinovic - 2018</p>
 					</div>
 				</div>
 
-				<div id="content" class="content col-md">
+				<div id="content" class="col-md">
 			        <?php echo $content ?>
 			    </div>
 			</div>

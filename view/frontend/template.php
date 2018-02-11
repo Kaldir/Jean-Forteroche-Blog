@@ -11,8 +11,8 @@
 	</head>
 
 	<body>
-		<div class="container-fluid">
-			<div class="row introContainer">
+		<div class="container-fluid introContainer">
+			<div class="row introRow">
 				<div id="header" class="col-md-4">
 					<div id="titleBlog">
 			            <a href="index.php"><img id="leather" src="./public/img/leather2.png" />
@@ -23,6 +23,8 @@
 			                <strong><p>Acteur renommé mais également écrivain, Jean Forteroche vous propose aujourd'hui de découvrir son dernier livre, par publication régulière, sur son blog spécialement dédié.</p></strong>
 			        </div>
 
+					<div id="pushFooter"></div>
+
 					<div id="adminPart">
 						<div id="adminLinks">
 							<a href="mailto:jean-forteroche@kldr.com"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a>
@@ -30,17 +32,15 @@
 							<a href=""><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
 						</div>
 						
-						<a href="index.php?action=loginForm">
-							<div class="buttonStyle">Connexion administrateur</div>
-						</a>
-					</div>
+						<a href="index.php?action=loginForm" class="buttonStyle" id="adminConnexion">Connexion administrateur</a>
+					</div>                
 
-					<div class="footer">
+                    <div class="footer">
 						<p>Site créé par Lucie Kojadinovic - 2018</p>
 					</div>
 				</div>
 
-				<div id="content" class="content col-md">
+				<div id="content" class="col-md">
 			        <?php echo $content ?>
 			    </div>
 			</div>

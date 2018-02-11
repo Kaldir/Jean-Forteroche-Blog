@@ -1,8 +1,8 @@
-<?php $title = 'Accueil administrateur';
+<?php $title = 'JF - Accueil administrateur';
 ob_start(); ?>
 
 <!-- CONNEXION ADMIN -->
-<h2>Bienvenue sur l'interface administrateur <?php echo $_SESSION['pseudo']; ?> !</h2>
+<h2>Bienvenue sur l'interface administrateur, <?php echo $_SESSION['pseudo']; ?> !</h2>
 
 <div class="news">
     <p>Vous pouvez ajouter, modifier ou supprimer des billets en cliquant sur le lien "<strong>Billets</strong>".</p>

@@ -6,7 +6,6 @@ require('controler/backend.php');
 $frontendControler = new \Kldr\Blog\Controler\FrontendControler();
 $backendControler = new \Kldr\Blog\Controler\BackendControler();
 
-// GESTION DE LA PAGINATION
 if (!isset($_GET['page']) || $_GET['page'] < 0) { // Si la variable page n'est pas définie
     $page = 1;
 } else {
@@ -27,21 +26,21 @@ if (!empty($_GET['action'])) {
             $frontendControler->error('L\'identifiant du billet n\'existe pas...');
         }
     
+    } elseif ($_GET['action'] == 'addComment') {
+        if (!empty($_GET['id']) && $_GET['id'] > 0) {
+            if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+                $frontendControler->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+            } else {
+                $frontendControler->error('Tous les champs ne sont pas remplis !');
+            }
+        } else {
+            $frontendControler->error('L\'identifiant du billet n\'existe pas...');
+        }
+
     } elseif (empty($_SESSION['admin'])) { // vérifie si une session admin existe ou non (en l'occurence, non), et permet donc uniquement l'exécution des actions front suivantes : 
 
     // FRONT COMMENTS
-        if ($_GET['action'] == 'addComment') {
-            if (!empty($_GET['id']) && $_GET['id'] > 0) {
-                if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    $frontendControler->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
-                } else {
-                    $frontendControler->error('Tous les champs ne sont pas remplis !');
-                }
-            } else {
-                $frontendControler->error('L\'identifiant du billet n\'existe pas...');
-            }   
-
-        } elseif ($_GET['action'] == 'signalComment') {
+        if ($_GET['action'] == 'signalComment') {
             if (!empty($_GET['id']) && $_GET['id'] > 0) {
                 $frontendControler->signal($_GET['id'], $_GET['postId']);
             } else {
@@ -59,9 +58,9 @@ if (!empty($_GET['action'])) {
                 $frontendControler->error('Tous les champs ne sont pas remplis !');
             }
 
-    // ERROR
+    // ERROR (if a non-admin action is executed with empty_$SESSION['admin'])
         } else {
-            $frontendControler->displayAllPost($zone); // on ne met pas de else, ainsi cette méthode est exécutée dans tous les cas
+            $frontendControler->displayAllPost($zone);
         }
 
     } else { // Sinon, si une session existe, les actions back qui suivent peuvent s'exécuter :
@@ -71,7 +70,7 @@ if (!empty($_GET['action'])) {
             $backendControler->editPostForm($_GET['id']);
 
         } elseif ($_GET['action'] == 'displayOnePostAdmin') {
-            $backendControler->displayOnePostAdmin($_GET['id']);
+            $backendControler->displayAllPost($_GET['id']);
 
         } elseif ($_GET['action'] == 'addPost') {
             $backendControler->addPost($_POST['title'], $_POST['content']);
@@ -130,6 +129,8 @@ if (!empty($_GET['action'])) {
 
         } elseif ($_GET['action'] == 'logout') {
             $backendControler->logout();
+        } else {
+            $frontendControler->displayAllPost($zone);
         }
     }
 } else {

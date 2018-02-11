@@ -1,4 +1,4 @@
-<?php $title = 'Connexion administrateur';
+<?php $title = 'JF - Connexion administrateur';
 ob_start(); ?>
 
 <!-- CONNEXION ADMIN -->

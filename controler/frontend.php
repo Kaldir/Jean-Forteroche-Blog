@@ -6,16 +6,6 @@ require_once('./controler/main.php');
 class FrontendControler extends MainControler
 {
 // COMMENTS
-	public function addComment($postId, $author, $comment) {
-		$commentManager = new \Kldr\Blog\Model\CommentManager();
-		$success = $commentManager->postComment($postId, $author, $comment);
-		if ($success != false) {
-			header('Location: index.php?action=displayOnePost&id=' . $postId);
-	    } else {
-			$this->error('Impossible d\'ajouter le commentaire !');
-	    }
-	}
-
 	public function signal($commentId, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$signal = $commentManager->signalComment($commentId);

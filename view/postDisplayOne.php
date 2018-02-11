@@ -1,7 +1,7 @@
-<?php $title = "Billet et commentaires";
+<?php $title = "JF - Billet et commentaires";
 ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dans la variable "content" -->
 
-<a href="index.php" class="buttonStyle">Retour</a>
+<input class="buttonStyle" onclick="window.history.back();" type="button" value="Retour" /> <!-- javascript qui permet le retour à la page précédente -->
 
 <!-- AFFICHAGE DU BILLET -->
 <div class="news">
@@ -48,9 +48,11 @@ while ($comment = $comments->fetch()) {
         <a href="index.php?action=signalComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;postId=<?php echo htmlspecialchars($_GET['id']); ?>"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
         <?php
         }
-        if (!empty($_SESSION['admin'])) {
         ?>
         <strong><?php echo htmlspecialchars($comment['author']); ?></strong>
+        <?php
+        if (!empty($_SESSION['admin'])) {
+        ?>
         <i class="smallInfosText">- <?php echo htmlspecialchars($comment['comment_date_fr']); ?></i>
 
         <a href="index.php?action=editCommentForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>

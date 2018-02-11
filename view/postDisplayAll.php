@@ -1,5 +1,4 @@
-<?php $title = 'Billets';
-require('./view/pagination.php');
+<?php $title = 'JF - Billets';
 ob_start(); // Permet de mémoriser le code html qui suit en le mettant dans la variable "content"
 
 if (!empty($_SESSION['admin'])) {
@@ -22,7 +21,7 @@ if (!empty($_SESSION['admin'])) {
 }
 ?>
 
-<?php echo $pagination; ?>
+<?php $this->pagination($nbPost); ?>
 
 <h2>Billets en ligne</h2>
 <!-- POSTS : affiche chaque entrée une à une (avec sécurité pour les failles XSS) -->
@@ -50,5 +49,5 @@ if (!empty($_SESSION['admin'])) {
 <?php
 }
 $posts->closeCursor(); // Termine le traitement de la requête
-echo $pagination;
+$this->pagination($nbPost);
 $content = ob_get_clean(); ?>

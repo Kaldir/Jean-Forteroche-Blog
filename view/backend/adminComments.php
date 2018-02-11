@@ -1,4 +1,4 @@
-<?php $title = 'Gestion des commentaires';
+<?php $title = 'JF - Commentaires signalés';
 ob_start(); ?>
 
 <!-- AFFICHAGE DES COMMENTAIRES SIGNALES -->

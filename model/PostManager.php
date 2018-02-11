@@ -8,7 +8,7 @@ class PostManager extends Manager
     public function getPosts($zone) { // renvoie la liste des posts
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, title, content, DATE_FORMAT(creation_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT ?, 5');
-        $req->bindValue(1, $zone, \PDO::PARAM_INT); // permet d'insérer la variable $zone dans la requête sql (en tant que nombre et pas string)
+        $req->bindValue(1, $zone, \PDO::PARAM_INT); // permet d'insérer la variable $zone dans la requête sql (en tant que nombre entier et pas string)
         $req->execute();
         return $req;
     }
