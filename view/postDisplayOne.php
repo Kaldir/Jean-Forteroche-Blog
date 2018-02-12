@@ -3,7 +3,7 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
 
 <input class="buttonStyle" onclick="window.history.back();" type="button" value="Retour" /> <!-- javascript qui permet le retour à la page précédente -->
 
-<!-- AFFICHAGE DU BILLET -->
+<!-- DISPLAY POST -->
 <div class="news">
     <h3><?php echo htmlspecialchars($post['title']); ?></h3> 
     <i class="smallInfosText">publié le <?php echo htmlspecialchars($post['creation_date_fr']); ?> </i>
@@ -19,7 +19,7 @@ if (!empty($_SESSION['admin'])) {
     <?php echo nl2br($post['content']); ?>
 </div>
 
-<!-- AFFICHAGE DES COMMENTAIRES -->
+<!-- DISPLAY COMMENTS -->
 <h2>Commentaires</h2>
 
 <div id="commentDisplay">
@@ -35,6 +35,8 @@ if (!empty($_SESSION['admin'])) {
 while ($comment = $comments->fetch()) {
 ?>
     <div class="commentStyle">
+<!-- SIGNALISED FOR ADMIN -->
+
         <?php
         if ($comment['signalised'] && !empty($_SESSION['admin'])) {
         ?>
@@ -43,24 +45,27 @@ while ($comment = $comments->fetch()) {
         </div>
         <?php    
         }
+// SIGNALISED FOR USERS
         if (empty($_SESSION['admin'])) {
         ?>
         <a href="index.php?action=signalComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;postId=<?php echo htmlspecialchars($_GET['id']); ?>"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
         <?php
         }
         ?>
+<!-- DISPLAY AUTHOR & DATE OF THE COMMENT -->
         <strong><?php echo htmlspecialchars($comment['author']); ?></strong>
+        <i class="smallInfosText">- <?php echo htmlspecialchars($comment['comment_date_fr']); ?></i>
+<!-- EDIT & DELETE COMMENT FOR ADMIN -->
         <?php
         if (!empty($_SESSION['admin'])) {
         ?>
-        <i class="smallInfosText">- <?php echo htmlspecialchars($comment['comment_date_fr']); ?></i>
-
         <a href="index.php?action=editCommentForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
         <a href="index.php?action=deleteComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
         <?php
         }
         ?>
+<!-- DISPLAY CONTENT OF THE COMMENT -->
         <p><?php echo $comment['comment']; ?></p>
     </div>
 <?php
@@ -68,6 +73,7 @@ while ($comment = $comments->fetch()) {
 ?>
 </div>
 
+<!-- MODAL BOOTSTRAP WHICH APPEAR WHEN COMMENT SIGNALISED BY USER -->
 <?php
 if ($signalised) {
 ?>

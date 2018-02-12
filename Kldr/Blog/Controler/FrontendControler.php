@@ -1,7 +1,5 @@
-<?php // CONTROLER
+<?php // CONTROLER - USER
 namespace Kldr\Blog\Controler;
-
-require_once('./controler/main.php');
 
 class FrontendControler extends MainControler
 {
@@ -18,13 +16,13 @@ class FrontendControler extends MainControler
 
 // ADMIN ACCOUNT
 	public function adminForm() {
-		$this->displayView('frontend/adminForm'); // on utilise $this pour appeler une méthode de sa propre classe
+		$this->displayView('frontend/adminForm'); // on utilise $this (qui représente ici la classe frontedncontroler) pour appeler une méthode de sa classe, héritée ou non
 	}
 
 	public function checkLogin($password, $email) {
 		$adminManager = new \Kldr\Blog\Model\AdminManager();
 		$adminInfo = $adminManager->checkLogin($_POST['password'], $_POST['email']);
-        if (is_array($adminInfo)) {
+        if (is_array($adminInfo)) { // on vérifie que l'on est en présence d'un tableau, car la méthode checkLogin retourne soit un tableau (dans la variabe $adminInfo), soit false.
             $_SESSION['admin'] = true;
             $_SESSION['pseudo'] = $adminInfo['pseudo']; // va chercher l'info pseudo contenu dans le tableau data contenu dans la variable adminInfo lorsque status = ok
             $_SESSION['email'] = $adminInfo['email'];

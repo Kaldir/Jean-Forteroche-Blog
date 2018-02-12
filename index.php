@@ -1,7 +1,7 @@
 <?php
 session_start();
-require('controler/frontend.php');
-require('controler/backend.php');
+require('autoloader/autoloader.php'); // chargement de l'autoloader
+Autoloader::register();
 
 $frontendControler = new \Kldr\Blog\Controler\FrontendControler();
 $backendControler = new \Kldr\Blog\Controler\BackendControler();

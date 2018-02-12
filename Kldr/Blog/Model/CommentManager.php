@@ -1,15 +1,13 @@
 <?php // MODEL
 namespace Kldr\Blog\Model;
 
-require_once("Manager.php");
-
 class CommentManager extends Manager
 {
     public function getComments($postId) // récupère les commentaires associés à un id de post
     {
 		$db = $this->dbConnect();
 	    $comments = $db->prepare('SELECT id, id_post, author, comment, signalised, DATE_FORMAT(comment_date, \'%d/%m/%Y (%Hh%imin%ss)\') AS comment_date_fr FROM comments WHERE id_post = ? ORDER BY comment_date DESC');
-	    $comments->execute(array($postId));
+	    $comments->execute(array($postId)); // permet d'exécuter la requête après avoir inséré les valeurs de façon sécurisée
     	return $comments;
 	}
 

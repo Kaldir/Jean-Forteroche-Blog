@@ -5,7 +5,7 @@ ob_start(); ?>
 <h2>Commentaires signalés</h2>
 
 <?php
-while ($comment = $comments->fetch()) {
+while ($comment = $comments->fetch()) { // fetch permet de récupérer le résultat d'une requête
 ?>
     <div class="news">
         <div class="commentStyle">

@@ -1,10 +1,5 @@
-<?php // CONTROLER - ADMIN
+<?php // CONTROLER - MAIN (fonction utilisées dans le frontend ET le backend)
 namespace Kldr\Blog\Controler;
-
-// Loading classes
-require_once('./model/PostManager.php');
-require_once('./model/CommentManager.php');
-require_once('./model/AdminManager.php');
 
 class MainControler
 {
@@ -15,15 +10,15 @@ class MainControler
 
 // ERROR
 	public function error($message = 'Erreur') {
-		$variables = array(
+		$variables = array( // création d'un tableau contenant une variable, afin de pouvoir utiliser celle-ci dans un autre contexte, ici, créé par la méthode displayView)
 			'message' => $message,
 		);
-		$this->displayView('error', $variables); // on utilise $this pour appeler une méthode de sa propre classe
+		$this->displayView('error', $variables); // on utilise $this (qui représente ici la classe MainControler) pour appeler une méthode de cette classe. Ici, on appelle la méthode displayView et ses arguments.
 	}
 
 // POSTS
 	public function displayView($view = 'postDisplayAll', $variables = array()) {
-		extract($variables); // fonction qui sert à aller chercher les variables contenu dans une variable contenant un array, et permet de les réutiliser ailleurs
+		extract($variables); // fonction qui sert à aller chercher les variables contenues dans une variable contenant un array, et permet de les réutiliser ailleurs
 		require('./view/' . $view . '.php');
 		if (!empty($_SESSION['admin'])) {
 			require('./view/backend/adminTemplate.php');
@@ -33,10 +28,10 @@ class MainControler
 	}
 
 	public function displayAllPost($zone = 0) {
-		$postManager = new \Kldr\Blog\Model\PostManager(); // Création d'un objet
-		$nbPost = $postManager->nbPost();
+		$postManager = new \Kldr\Blog\Model\PostManager(); // Création de l'objet postManager
+		$nbPost = $postManager->nbPost(); // Appel de la méthode nbPost (qui n'a ici pas d'argument), qui se trouve dans l'objet postManager
 		if ($nbPost > 0) {
-			$posts = $postManager->getPosts($zone); // Appel d'une méthode et de son argument
+			$posts = $postManager->getPosts($zone); 
 			$variables = array(
 				'posts' => $posts,
 				'nbPost' => $nbPost,
@@ -65,8 +60,8 @@ class MainControler
 	}
 
     public function getExcerpt($string, $start = 0, $maxLength = 300) { // Affiche un extrait d'un billet et donne des valeurs par défaut qui sont modifiable lorsque on fait appel à la méthode (à cause de tinyMCE, il faut penser à prendre en compte les balises html, non visible sur le site mais considérées par le maxLength)
-        if (strlen($string) > $maxLength) { // si le texte est supérieur à 100 caractères
-            $string = substr($string, $start, $maxLength); // affiche le texte, depuis le premier caractère, jusqu'à 100 caractères
+        if (strlen($string) > $maxLength) { // si le texte est supérieur à 300 caractères
+            $string = substr($string, $start, $maxLength); // affiche le texte, depuis le premier caractère, jusqu'à 300 caractères
             $string  .= '...';
         }
         return $string;
@@ -77,7 +72,7 @@ class MainControler
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 		$success = $commentManager->postComment($postId, $author, $comment);
 		if ($success != false) {
-			header('Location: index.php?action=displayOnePost&id=' . $postId);
+			header('Location: index.php?action=displayOnePost&id=' . $postId); // le . sert à "concaténer", c'est à dire à mettre côte à côte des chaines de caractère
 	    } else {
 			$this->error('Impossible d\'ajouter le commentaire !');
 	    }

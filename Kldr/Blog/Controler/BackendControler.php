@@ -1,8 +1,6 @@
 <?php // CONTROLER - ADMIN
 namespace Kldr\Blog\Controler;
 
-require_once('./controler/main.php');
-
 class BackendControler extends MainControler
 {
 

@@ -1,8 +1,6 @@
 <?php // Model
 namespace Kldr\Blog\Model;
 
-require_once("Manager.php");
-
 class PostManager extends Manager
 {
     public function getPosts($zone) { // renvoie la liste des posts
