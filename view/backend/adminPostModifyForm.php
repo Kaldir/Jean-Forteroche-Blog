@@ -6,12 +6,12 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
 <input class="buttonStyle" onclick="window.history.back();" type="button" value="Annuler" /> <!-- javascript qui permet le retour à la page précédente -->
 
 <div class="news">
-    <form action="index.php?action=editPost&amp;id=<?= $_GET['id'] ?>" method="post">
+    <form action="index.php?action=editPost&amp;id=<?php echo htmlspecialchars($_GET['id']) ?>" method="post">
         <div>
             <label for="title">Titre</label><br />
             <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($post['title'] )?>" /><br />
             <label for="content">Contenu</label><br />
-            <textarea id="content" name="content"><?php echo $post['content'] ?></textarea>
+            <textarea id="content" name="content"><?php echo htmlspecialchars($post['content']) ?></textarea>
         </div>
 
         <div>

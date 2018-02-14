@@ -30,7 +30,7 @@ form label {
 }
     #titleBlog {
         color: white;
-        font-family: Copperplate Gothic;
+        font-family: 'Copperplate Gothic';
         margin-top: 60px;
     }
         #titleBlog a {
@@ -62,7 +62,7 @@ form label {
             width: 100%;
             text-align: center;
         }
-    #adminPart {
+    .adminPart {
         background-color: rgba(255, 255, 255, 0.5);
         border-radius : 5px;
         margin: 10px;
@@ -70,7 +70,7 @@ form label {
     }    
         #adminLinks {
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-around;
             margin-bottom: 5px;
         }
         #adminLinks a {
@@ -148,7 +148,7 @@ form label {
             color: white;
         }
     #content h3 {
-        font-family: Copperplate Gothic;
+        font-family: 'Copperplate Gothic';
         font-size: 1.8em;
         color: #772e01;
     }
@@ -266,27 +266,4 @@ form label {
     font-size: 1.2em;
     color: white;
     font-weight: bold;
-}
-
-/* MEDIA QUERIES */
-
-@media (max-width: 1024px) {
-
-    #header {
-        min-height: 1366px;
-    }
-}
-
-@media (max-width: 768px) {
-
-    #header {
-    min-height: 1024px;
-    }
-}
-
-@media (max-width: 640px) {
-
-    #header {
-    min-height: 700px;
-    }
 }

@@ -21,7 +21,7 @@ if (!empty($_SESSION['admin'])) {
 }
 ?>
 
-<?php $this->pagination($nbPost); ?>
+<?php $this->pagination($nbPost); ?> <!-- on est ici à l'intérieur de displayView, qui affiche la vue. On est donc au sein de la classe MainControler, on peut donc utiliser des méthodes de cette classe -->
 
 <h2>Billets en ligne</h2>
 <!-- POSTS : affiche chaque entrée une à une (avec sécurité pour les failles XSS) -->
@@ -37,9 +37,9 @@ while ($data = $posts->fetch()) {
 <?php
 if (!empty($_SESSION['admin'])) {
 ?>
-		<a href="index.php?action=editPostForm&amp;id=<?php echo htmlspecialchars($data['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+		<a href="index.php?action=editPostForm&amp;id=<?php echo htmlspecialchars($data['id']); ?>"><i class="fa fa-pencil" title="Modifier" aria-hidden="true"></i></a>
 
-		<a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($data['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce billet ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
+		<a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($data['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce billet ?'));"><i class="fa fa-trash" title="Supprimer" aria-hidden="true"></i></a>
 <?php
 }
 ?>

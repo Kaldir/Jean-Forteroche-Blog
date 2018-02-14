@@ -10,9 +10,9 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
 <?php
 if (!empty($_SESSION['admin'])) {
 ?>
-    <a href="index.php?action=editPostForm&amp;id=<?php echo htmlspecialchars($post['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    <a href="index.php?action=editPostForm&amp;id=<?php echo htmlspecialchars($post['id']); ?>"><i class="fa fa-pencil" title="Modifier" aria-hidden="true"></i></a>
 
-    <a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($post['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce billet ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
+    <a href="index.php?action=deletePost&amp;id=<?php echo htmlspecialchars($post['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce billet ?'));"><i class="fa fa-trash" title="Supprimer" aria-hidden="true"></i></a>
 <?php
 }
 ?>
@@ -41,14 +41,14 @@ while ($comment = $comments->fetch()) {
         if ($comment['signalised'] && !empty($_SESSION['admin'])) {
         ?>
         <div class="adminSignalised">
-            <i class="fa fa-exclamation-triangle"></i> Commentaire signalé par un utilisateur <i class="fa fa-exclamation-triangle"></i>
+            <i class="fa fa-exclamation-triangle"></i> Commentaire signalé <i class="fa fa-exclamation-triangle"></i>
         </div>
         <?php    
         }
 // SIGNALISED FOR USERS
         if (empty($_SESSION['admin'])) {
         ?>
-        <a href="index.php?action=signalComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;postId=<?php echo htmlspecialchars($_GET['id']); ?>"><i class="fa fa-exclamation-circle" aria-hidden="true"></i></a>
+        <a href="index.php?action=signalComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;postId=<?php echo htmlspecialchars($_GET['id']); ?>"><i class="fa fa-exclamation-circle"  title='Signaler' aria-hidden="true"></i></a>
         <?php
         }
         ?>
@@ -59,9 +59,9 @@ while ($comment = $comments->fetch()) {
         <?php
         if (!empty($_SESSION['admin'])) {
         ?>
-        <a href="index.php?action=editCommentForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+        <a href="index.php?action=editCommentForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>"><i class="fa fa-pencil" title='Modifier' aria-hidden="true"></i></a>
 
-        <a href="index.php?action=deleteComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        <a href="index.php?action=deleteComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));"><i class="fa fa-trash" title='Supprimer' aria-hidden="true"></i></a>
         <?php
         }
         ?>

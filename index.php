@@ -69,9 +69,6 @@ if (!empty($_GET['action'])) {
         if ($_GET['action'] == 'editPostForm') {
             $backendControler->editPostForm($_GET['id']);
 
-        } elseif ($_GET['action'] == 'displayOnePostAdmin') {
-            $backendControler->displayAllPost($_GET['id']);
-
         } elseif ($_GET['action'] == 'addPost') {
             $backendControler->addPost($_POST['title'], $_POST['content']);
 

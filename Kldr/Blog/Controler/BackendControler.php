@@ -9,22 +9,6 @@ class BackendControler extends MainControler
 		$this->displayView('backend/adminIndex'); // on utilise $this pour appeler une méthode de sa propre classe
 	}
 
-	public function displayOnePostAdmin($postId) {
-		$postManager = new \Kldr\Blog\Model\PostManager();
-		$commentManager = new \Kldr\Blog\Model\CommentManager();
-		$post = $postManager->getPost($postId);
-		$comments = $commentManager->getComments($postId);
-		if (!empty($post)) {
-			$variables = array(
-				'post' => $post,
-				'comments' => $comments,				
-			);
-			$this->displayView('postDisplayOne', $variables);
-		} else {
-			$this->error('Il n\'y a aucun billet à afficher !');
-		}
-	}
-
 	public function editPostForm($postId) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 	    $post = $postManager->getPost($postId);

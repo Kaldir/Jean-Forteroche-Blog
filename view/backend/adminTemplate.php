@@ -15,8 +15,8 @@
 			<div class="row introRow">
 				<div id="header" class="col-md-4">
 					<div id="titleBlog">
-			            <a href="index.php?action=adminIndex"><img id="leather" src="./public/img/leather2.png" />
-			            <h2>Billet simple pour l'Alaska</h2></a>
+			            <a href="index.php?action=adminIndex"><img id="leather" src="./public/img/leather2.png" alt="logo_JF" />
+			            <h1>Billet simple pour l'Alaska</h1></a>
 			        </div>
 		       
 			        <div id="admin">

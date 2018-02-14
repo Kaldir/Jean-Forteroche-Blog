@@ -19,7 +19,7 @@ while ($comment = $comments->fetch()) { // fetch permet de récupérer le résul
             <p><?php echo $comment['comment']; ?></p>
         </div>
         <div class="linkComment">
-            <p>En provenance du billet "<a href="index.php?action=displayOnePostAdmin&amp;id=<?php echo htmlspecialchars($comment['id_post']); ?>" class="titleComment"><?php echo htmlspecialchars($comment['title']); ?></a>"</p>
+            <p>En provenance du billet "<a href="index.php?action=displayOnePost&amp;id=<?php echo htmlspecialchars($comment['id_post']); ?>" class="titleComment"><?php echo htmlspecialchars($comment['title']); ?></a>"</p>
         </div>
     </div>
 <?php
