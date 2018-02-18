@@ -66,21 +66,21 @@ class BackendControler extends MainControler
 		}
 	}
 
-	public function editComment($commentId, $comment) {
+	public function editComment($commentId, $comment, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 	    $editComment = $commentManager->editComment($commentId, $comment);
 	    if ($editComment > 0) {
-	        header('Location: index.php?action=displaySignalisedCommentsAdmin');
+	        header('Location: index.php?action=displayOnePost&id='. $postId);
 		} else {
 			$this->error('Impossible d\'éditer le commentaire...');
 		}
 	}
 
-	public function deleteComment($commentId) {
+	public function deleteComment($commentId, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();
 	    $deleteComment = $commentManager->deleteComment($commentId);
 	    if ($deleteComment > 0) {
-	 	header('Location: index.php?action=displaySignalisedCommentsAdmin'); // renvoie l'admin sur la page des commentaires signalés après la suppression de l'un d'eux
+	        header('Location: index.php?action=displayOnePost&id='. $postId);
 		} else {
 			$this->error('Aucun commentaire n\'a été effacé...');
 		}

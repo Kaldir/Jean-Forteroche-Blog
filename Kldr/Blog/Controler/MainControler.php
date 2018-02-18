@@ -2,7 +2,7 @@
 namespace Kldr\Blog\Controler;
 
 class MainControler
-{
+{	
 // PAGINATION
 	public function pagination($nbPost) {
 		require('./view/pagination.php');
@@ -27,11 +27,11 @@ class MainControler
 		}
 	}
 
-	public function displayAllPost($zone = 0) {
+	public function displayAllPost($firstPost = 0) {
 		$postManager = new \Kldr\Blog\Model\PostManager(); // Création de l'objet postManager
 		$nbPost = $postManager->nbPost(); // Appel de la méthode nbPost (qui n'a ici pas d'argument), qui se trouve dans l'objet postManager
 		if ($nbPost > 0) {
-			$posts = $postManager->getPosts($zone); 
+			$posts = $postManager->getPosts($firstPost); 
 			$variables = array(
 				'posts' => $posts,
 				'nbPost' => $nbPost,

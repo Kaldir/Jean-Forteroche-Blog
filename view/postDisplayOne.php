@@ -27,7 +27,7 @@ if (!empty($_SESSION['admin'])) {
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" />
         <label for="comment">Commentaire</label><br />
-        <input id="comment" name="comment"></input>
+        <input id="comment" name="comment" />
         <input type="submit" class="buttonStyle" />
     </form>
 
@@ -61,12 +61,12 @@ while ($comment = $comments->fetch()) {
         ?>
         <a href="index.php?action=editCommentForm&amp;id=<?php echo htmlspecialchars($comment['id']); ?>"><i class="fa fa-pencil" title='Modifier' aria-hidden="true"></i></a>
 
-        <a href="index.php?action=deleteComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));"><i class="fa fa-trash" title='Supprimer' aria-hidden="true"></i></a>
+        <a href="index.php?action=deleteComment&amp;id=<?php echo htmlspecialchars($comment['id']); ?>&amp;id_post=<?php echo htmlspecialchars($comment['id_post']); ?>" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce commentaire ?'));"><i class="fa fa-trash" title='Supprimer' aria-hidden="true"></i></a>
         <?php
         }
         ?>
 <!-- DISPLAY CONTENT OF THE COMMENT -->
-        <p><?php echo $comment['comment']; ?></p>
+        <p><?php echo htmlspecialchars($comment['comment']); ?></p>
     </div>
 <?php
 }

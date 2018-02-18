@@ -6,12 +6,13 @@ Autoloader::register();
 $frontendControler = new \Kldr\Blog\Controler\FrontendControler();
 $backendControler = new \Kldr\Blog\Controler\BackendControler();
 
+// Permet de récupérer le numéro du premier billet de la page à afficher (5 billets/page)
 if (!isset($_GET['page']) || $_GET['page'] < 0) { // Si la variable page n'est pas définie
     $page = 1;
 } else {
     $page = htmlspecialchars($_GET['page']); // Sinon lecture de la page
 }
-$zone = 5 * ($page - 1); // Calcul du facteur multiplicateur pour determinez la zone
+$firstPost = 5 * ($page - 1); // Calcul pour determiner le premier billet de la page
 
 // GESTION DES ACTIONS
 if (!empty($_GET['action'])) {
@@ -60,7 +61,7 @@ if (!empty($_GET['action'])) {
 
     // ERROR (if a non-admin action is executed with empty_$SESSION['admin'])
         } else {
-            $frontendControler->displayAllPost($zone);
+            $frontendControler->displayView('404');
         }
 
     } else { // Sinon, si une session existe, les actions back qui suivent peuvent s'exécuter :
@@ -101,7 +102,7 @@ if (!empty($_GET['action'])) {
             }
 
         } elseif ($_GET['action'] == 'deleteComment') {
-            $backendControler->deleteComment($_GET['id']);
+            $backendControler->deleteComment($_GET['id'], $_GET['id_post']);
 
     // BACK ADMIN ACCOUNT
         } elseif ($_GET['action'] == 'adminIndex') {
@@ -127,9 +128,9 @@ if (!empty($_GET['action'])) {
         } elseif ($_GET['action'] == 'logout') {
             $backendControler->logout();
         } else {
-            $frontendControler->displayAllPost($zone);
+            $frontendControler->displayView('404');
         }
     }
 } else {
-$frontendControler->displayAllPost($zone); // on ne met pas de else, ainsi cette méthode est exécutée dans tous les cas
+$frontendControler->displayAllPost($firstPost);
 }

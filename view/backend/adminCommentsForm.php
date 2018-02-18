@@ -9,10 +9,9 @@ ob_start(); ?>
     <form action="index.php?action=editComment" method="post">
         <div>
             <label for="comment">Commentaire</label><br />
-            <textarea id="comment" name="comment" /><?php echo nl2br(htmlspecialchars($comment['comment'])) ?></textarea>
+            <input id="comment" name="comment" value="<?php echo nl2br(htmlspecialchars($comment['comment'])) ?>" />
             <input name="id_post" type="hidden" value="<?php echo (htmlspecialchars($comment['id_post'])) ?>"/ >
             <input name="id" type="hidden" value="<?php echo (htmlspecialchars($comment['id'])) ?>"/ >
-
             <input type="submit" class="buttonStyle" name="newComment" value="Modifier" />
         </div>
     </form>
