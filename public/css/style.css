@@ -249,11 +249,11 @@ form label {
 
 /* CONNEXION ADMIN */
 
-#connexionAdmin {
+.connexionAdmin {
     display: flex;
     flex-direction: column;
 }
-    #connexionAdmin .buttonStyle {
+    .connexionAdmin .buttonStyle {
         margin: 0;
         align-self: flex-end;
     }

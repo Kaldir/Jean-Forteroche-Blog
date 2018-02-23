@@ -12,9 +12,7 @@ ob_start(); ?> <!-- Permet de mémoriser le code html qui suit en le mettant dan
             <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($post['title'] )?>" /><br />
             <label for="content">Contenu</label><br />
             <textarea id="content" name="content"><?php echo htmlspecialchars($post['content']) ?></textarea>
-        </div>
-
-        <div>
+            <input name="token" type="hidden" value="<?php echo $this->getToken(); ?>"/ > <!-- this est ici le BackendControler -->
             <input type="submit" name="newPost" class="buttonStyle" value="Modifier" />
         </div>
     </form>

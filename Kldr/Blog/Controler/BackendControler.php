@@ -3,6 +3,13 @@ namespace Kldr\Blog\Controler;
 
 class BackendControler extends MainControler
 {
+// TOKENS
+    public function __construct() { // permet d'hériter des variables propres au parent
+        parent::__construct();
+    }
+    public function getToken() { // retourne le token généré quand on a créé un nouvel objet FrontendController dans l'index
+        return $this->token;
+    }
 
 // POSTS
 	public function adminIndex() {
@@ -32,11 +39,14 @@ class BackendControler extends MainControler
 	    }
 	}
 
-	public function editPost($title, $content, $postId) {
+	public function editPost($title, $content, $postId, $token) {
 		$postManager = new \Kldr\Blog\Model\PostManager();
 		$success = $postManager->editPost($title, $content, $postId);
-		if ($success > 0) {
-			header('Location: index.php');
+		if ($_SESSION['token'] != $token) { // vérifie si le token de session correspond à celui qui vient du formulaire
+            $this->error('Erreur de session');
+        }
+		elseif ($success > 0) {
+            header('Location: index.php?action=displayOnePost&id='. $postId);
 		} else {
 			$this->error('Impossible d\'éditer le billet !');
 		}		    	
@@ -66,15 +76,18 @@ class BackendControler extends MainControler
 		}
 	}
 
-	public function editComment($commentId, $comment, $postId) {
-		$commentManager = new \Kldr\Blog\Model\CommentManager();
-	    $editComment = $commentManager->editComment($commentId, $comment);
-	    if ($editComment > 0) {
-	        header('Location: index.php?action=displayOnePost&id='. $postId);
-		} else {
-			$this->error('Impossible d\'éditer le commentaire...');
-		}
-	}
+	public function editComment($commentId, $comment, $postId, $token) {
+        $commentManager = new \Kldr\Blog\Model\CommentManager();
+        $editComment = $commentManager->editComment($commentId, $comment);
+        if ($_SESSION['token'] != $token) { // vérifie si le token de session correspond à celui qui vient du formulaire
+            $this->error('Erreur de session');
+        }
+        elseif ($editComment > 0) {
+            header('Location: index.php?action=displayOnePost&id='. $postId);
+        } else {
+            $this->error('Impossible d\'éditer le commentaire...');
+        }
+    }
 
 	public function deleteComment($commentId, $postId) {
 		$commentManager = new \Kldr\Blog\Model\CommentManager();

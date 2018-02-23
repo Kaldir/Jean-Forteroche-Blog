@@ -29,7 +29,7 @@ if (!empty($_GET['action'])) {
     
     } elseif ($_GET['action'] == 'addComment') {
         if (!empty($_GET['id']) && $_GET['id'] > 0) {
-            if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+            if (!empty(trim($_POST['author'])) && !empty(trim($_POST['comment']))) {
                 $frontendControler->addComment($_GET['id'], $_POST['author'], $_POST['comment']);
             } else {
                 $frontendControler->error('Tous les champs ne sont pas remplis !');
@@ -59,23 +59,34 @@ if (!empty($_GET['action'])) {
                 $frontendControler->error('Tous les champs ne sont pas remplis !');
             }
 
-    // ERROR (if a non-admin action is executed with empty_$SESSION['admin'])
+    // ERROR (if a non-admin action is executed with empty($_SESSION['admin'])
         } else {
+            header('HTTP/1.0 404 Not Found');
             $frontendControler->displayView('404');
+            exit;
         }
 
     } else { // Sinon, si une session existe, les actions back qui suivent peuvent s'exécuter :
 
     // BACK POSTS
         if ($_GET['action'] == 'editPostForm') {
-            $backendControler->editPostForm($_GET['id']);
+            if (!empty($_GET['id']) && $_GET['id'] > 0) {
+                $_SESSION['token'] = $backendControler->getToken(); // assigne la variable de session à la valeur du token actuel
+                $backendControler->editPostForm($_GET['id']);
+            } else {
+                $backendControler->error('L\'identifiant du billet n\'existe pas...');
+            }
 
         } elseif ($_GET['action'] == 'addPost') {
-            $backendControler->addPost($_POST['title'], $_POST['content']);
+            if (!empty(trim($_POST['title'])) && !empty(trim($_POST['content']))) {
+                $backendControler->addPost($_POST['title'], $_POST['content']);
+            } else {
+                $backendControler->error('Tous les champs ne sont pas remplis !');
+            }
 
         } elseif ($_GET['action'] == 'editPost') {
-            if (!empty($_GET['id']) && $_GET['id'] > 0 && !empty($_POST['title']) && !empty($_POST['content'])) {
-                $backendControler->editPost($_POST['title'], $_POST['content'], $_GET['id']);
+            if (!empty($_GET['id']) && $_GET['id'] > 0 && !empty(trim($_POST['title'])) && !empty(trim($_POST['content']))) {
+                $backendControler->editPost($_POST['title'], $_POST['content'], $_GET['id'], $_POST['token']);
             } else {
                 $backendControler->error('L\'identifiant du billet n\'existe pas et/ou tous les champs ne sont pas remplis.');
             }
@@ -89,14 +100,15 @@ if (!empty($_GET['action'])) {
 
         } elseif ($_GET['action'] == 'editCommentForm') {
             if (!empty($_GET['id']) && $_GET['id'] > 0) {
+                $_SESSION['token'] = $backendControler->getToken(); // assigne la variable de session à la valeur du token actuel
                 $backendControler->editCommentForm($_GET['id']);
             } else {
                 $backendControler->error('L\'identifiant du billet n\'existe pas...');
-            }
+            }            
 
         } elseif ($_GET['action'] == 'editComment') {
-            if (!empty($_POST['id']) && $_POST['id'] > 0 && !empty($_POST['comment']) && !empty($_POST['id_post']) && $_POST['id_post'] > 0) {
-                $backendControler->editComment($_POST['id'], $_POST['comment'], $_POST['id_post']);
+            if (!empty($_POST['id']) && $_POST['id'] > 0 && !empty(trim($_POST['comment'])) && !empty($_POST['id_post']) && $_POST['id_post'] > 0) {
+                $backendControler->editComment($_POST['id'], $_POST['comment'], $_POST['id_post'], $_POST['token']);
             } else {
                 $backendControler->error('Tous les champs ne sont pas remplis !');
             }

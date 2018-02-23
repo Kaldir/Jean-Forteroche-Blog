@@ -12,6 +12,7 @@ ob_start(); ?>
             <input id="comment" name="comment" value="<?php echo nl2br(htmlspecialchars($comment['comment'])) ?>" />
             <input name="id_post" type="hidden" value="<?php echo (htmlspecialchars($comment['id_post'])) ?>"/ >
             <input name="id" type="hidden" value="<?php echo (htmlspecialchars($comment['id'])) ?>"/ >
+            <input name="token" type="hidden" value="<?php echo $this->getToken(); ?>"/ > <!-- this est ici le BackendControler -->
             <input type="submit" class="buttonStyle" name="newComment" value="Modifier" />
         </div>
     </form>

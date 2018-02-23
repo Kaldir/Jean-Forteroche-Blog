@@ -3,6 +3,16 @@ namespace Kldr\Blog\Controler;
 
 class MainControler
 {	
+// TOKENS
+    protected $token;
+
+    public function __construct() {
+        $this->generateToken();
+    }
+    protected function generateToken() {
+        $this->token = bin2hex(random_bytes(32));;
+    }
+    
 // PAGINATION
 	public function pagination($nbPost) {
 		require('./view/pagination.php');

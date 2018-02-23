@@ -7,7 +7,7 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="public/css/style.css" type="text/css" />
 	    <meta name="viewport" content="initial-scale=1.0" />
-	    <link rel="icon" type="image/png" href="img/favicon.png" />
+	    <link rel="icon" type="image/png" href="./public/img/favicon.png" />
 	</head>
 
 	<body>
